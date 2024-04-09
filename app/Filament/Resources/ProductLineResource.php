@@ -23,7 +23,15 @@ class ProductLineResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('brand_id')
+                    ->relationship('brand', 'name'),
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Select::make('user_id')
+                    ->relationship('user', 'name'),
+                Forms\Components\Toggle::make('active')
+                    ->required(),
             ]);
     }
 
@@ -31,7 +39,24 @@ class ProductLineResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('brand.name')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('active')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
