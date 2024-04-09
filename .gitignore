@@ -19,3 +19,4 @@ yarn-error.log
 /.docker
 /storage/certs/jwt-rsa-4096-private.pem
 /storage/certs/jwt-rsa-4096-public.pem
+/.blueprint

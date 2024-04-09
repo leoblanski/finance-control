@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class User extends Model
+class ProductBalance extends Model
 {
     use HasFactory;
 
@@ -15,20 +16,9 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'email_verified_at',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
+        'brand_id',
+        'product_id',
+        'qty',
     ];
 
     /**
@@ -38,6 +28,17 @@ class User extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'email_verified_at' => 'timestamp',
+        'brand_id' => 'integer',
+        'product_id' => 'integer',
     ];
+
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
