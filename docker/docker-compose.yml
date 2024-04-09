@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   nginx:
-    container_name: rw-nginx
+    container_name: fc-nginx
     image: nginx:alpine
     restart: unless-stopped
     working_dir: /var/www
@@ -17,12 +17,12 @@ services:
       - "local.regal-wings:host-gateway"
 
   php:
-    image: rw-php
+    image: fc-php
     build:
       context: php/
       args:
         WORKDIR: /var/www
-    container_name: rw-php
+    container_name: fc-php
     restart: unless-stopped
     volumes:
       - ../:/var/www
@@ -31,16 +31,16 @@ services:
       - laravel
     extra_hosts:
       - "local.regal-wings:host-gateway"
-    user: '1000'
+    # user: '1000'
 
   mysql:
-    container_name: rw-mysql
+    container_name: fc-mysql
     image: mysql:8.0
     environment:
-      MYSQL_DATABASE: rw
-      MYSQL_ROOT_PASSWORD: rw_pw
-      MYSQL_PASSWORD: rw_pw
-      MYSQL_USER: rw_user
+      MYSQL_DATABASE: fc
+      MYSQL_ROOT_PASSWORD: fc_pw
+      MYSQL_PASSWORD: fc_pw
+      MYSQL_USER: fc_user
     ports:
       - "3306:3306"
     volumes: 
@@ -49,7 +49,7 @@ services:
       - laravel
 
   phpmyadmin:
-    container_name: rw-pma
+    container_name: fc-pma
     image: phpmyadmin/phpmyadmin
     depends_on:
       - mysql
@@ -58,14 +58,14 @@ services:
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
-      PMA_USER: rw_user
-      PMA_PASSWORD: rw_pw
+      PMA_USER: fc_user
+      PMA_PASSWORD: fc_pw
     networks:
       - laravel
   
   redis:
     image: redis:alpine
-    container_name: rw-redis
+    container_name: fc-redis
     ports:
       - "6379:6379"
     networks:
