@@ -1,0 +1,76 @@
+version: "3.9"
+
+services:
+  nginx:
+    container_name: rw-nginx
+    image: nginx:alpine
+    restart: unless-stopped
+    working_dir: /var/www
+    ports:
+      - "80:80"
+    volumes:
+      - ../:/var/www
+      - ./nginx/config/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - laravel
+    extra_hosts:
+      - "local.regal-wings:host-gateway"
+
+  php:
+    image: rw-php
+    build:
+      context: php/
+      args:
+        WORKDIR: /var/www
+    container_name: rw-php
+    restart: unless-stopped
+    volumes:
+      - ../:/var/www
+      - ./php/php.ini:/usr/local/etc/php/conf.d/php-fpm.ini
+    networks:
+      - laravel
+    extra_hosts:
+      - "local.regal-wings:host-gateway"
+    user: '1000'
+
+  mysql:
+    container_name: rw-mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: rw
+      MYSQL_ROOT_PASSWORD: rw_pw
+      MYSQL_PASSWORD: rw_pw
+      MYSQL_USER: rw_user
+    ports:
+      - "3306:3306"
+    volumes: 
+      - ../.docker/mysql/dbdata:/var/lib/mysql
+    networks:
+      - laravel
+
+  phpmyadmin:
+    container_name: rw-pma
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - mysql
+    ports:
+      - "8888:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: rw_user
+      PMA_PASSWORD: rw_pw
+    networks:
+      - laravel
+  
+  redis:
+    image: redis:alpine
+    container_name: rw-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    driver: bridge
