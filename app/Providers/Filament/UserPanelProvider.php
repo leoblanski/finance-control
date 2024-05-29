@@ -2,6 +2,9 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Auth\Login;
+use App\Filament\Auth\PasswordReset\RequestPasswordReset;
+use App\Filament\Auth\Register;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -26,10 +29,15 @@ class UserPanelProvider extends PanelProvider
             ->default()
             ->id('user')
             ->path('/')
-            ->login()
-            ->colors([
-                'primary' => Color::Amber,
-            ])
+            ->login(
+                Login::class,
+            )
+            ->font('Poppins')
+            ->registration(Register::class)
+            ->registrationRouteSlug('signup')
+            ->passwordReset(
+                RequestPasswordReset::class
+            )
             ->globalSearch(true)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -54,6 +62,7 @@ class UserPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->viteTheme('resources/css/app.css');
     }
 }

@@ -1,0 +1,132 @@
+@import "../../vendor/filament/filament/resources/css/theme.css";
+@import "./variables.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: capitalize;
+}
+
+h1 {
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+}
+
+h3 {
+  font-size: 0.85rem;
+}
+
+:is(.dark) .border-b,
+:is(.dark) hr {
+  border-color: rgba(var(--gray-700), 1);
+}
+
+.text-primary {
+  color: rgb(var(--primary-500));
+}
+
+.fi-section-header-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.fi-ta-header-heading {
+  /* filament::table h3 heading title */
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.fi-btn {
+  /* filament::button overriden styles */
+  border-radius: 100px !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: normal !important;
+  text-transform: capitalize !important;
+}
+
+.text-xs {
+  font-size: .875rem;
+}
+
+* {
+  font-family: var(--font-family), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+
+/* Auth pages */
+
+.auth-page>section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 0;
+}
+
+.auth-page>section>header {
+  display: none;
+}
+
+.auth-quote-grid {
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr;
+  gap: 1rem;
+  color: white;
+}
+
+.auth-image {
+  background: linear-gradient(#FF8C00, #EF7D00);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  min-height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  position: relative;
+}
+
+.auth-image .top-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.auth-image .bottom-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Reset any RTL styles */
+body {
+  direction: ltr;
+}
