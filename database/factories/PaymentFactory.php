@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Brand;
 use App\Models\Payment;
+use App\Models\PaymentType;
 
 class PaymentFactory extends Factory
 {
@@ -27,7 +28,7 @@ class PaymentFactory extends Factory
             'name' => $this->faker->name(),
             'user_id' => User::factory(),
             'active' => $this->faker->boolean(),
-            'payment_type_id' => ::factory(),
+            'payment_type_id' => PaymentType::factory(),
         ];
     }
 }

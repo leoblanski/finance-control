@@ -31,7 +31,7 @@ services:
       - laravel
     extra_hosts:
       - "local.regal-wings:host-gateway"
-    # user: '1000'
+    user: '1000'
 
   mysql:
     container_name: fc-mysql
@@ -43,7 +43,7 @@ services:
       MYSQL_USER: fc_user
     ports:
       - "3306:3306"
-    volumes: 
+    volumes:
       - ../.docker/mysql/dbdata:/var/lib/mysql
     networks:
       - laravel
@@ -62,7 +62,7 @@ services:
       PMA_PASSWORD: fc_pw
     networks:
       - laravel
-  
+
   redis:
     image: redis:alpine
     container_name: fc-redis

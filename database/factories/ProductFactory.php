@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\ProductBrand;
+use App\Models\ProductLine;
 
 class ProductFactory extends Factory
 {
@@ -28,9 +30,9 @@ class ProductFactory extends Factory
             'description' => $this->faker->text(),
             'reference' => $this->faker->word(),
             'user_id' => User::factory(),
-            'product_brand_id' => ::factory(),
-            'product_line_id' => ::factory(),
-            'product_category_id' => ::factory(),
+            'product_brand_id' => ProductBrand::factory(),
+            'product_line_id' => ProductLine::factory(),
+            'product_category_id' => ProductCategory::factory(),
             'codebar' => $this->faker->word(),
             'active' => $this->faker->boolean(),
             'cost_price' => $this->faker->randomFloat(0, 0, 9999999999.),
