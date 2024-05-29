@@ -4,18 +4,18 @@
     <div class="grid md:grid-cols-2 h-full w-full">
         <div class="flex flex-col gap-10 self-center items-center">
             <x-filament-panels::form wire:submit.prevent="register" class="sm:w-4/5 md:w-3/5">
-                <x-filament-panels::header heading="Sign Up For Free Today" />
+                <x-filament-panels::header heading="Cadastro grátis hoje" />
                 {{ $this->form }}
 
                 <x-filament::button type="submit" variant="primary" :form="$this->form" wire:target="register">
-                    Start Your 30 Day Free Trial
+                    Comece seu teste pelo período de 30 dias
                 </x-filament::button>
-                <p class="text-center text-xs">No Credit Card Required</p>
+                <p class="text-center text-xs">Não é necessário cartão de crédito</p>
             </x-filament-panels::form>
 
             <footer class="mt-10 flex justify-around w-2/5 hidden"> {{-- hidden until Paul send us info --}}
-                <a href="#" class="underline">Need Help</a>
-                <a href="#" class="underline">Privacy Policy</a>
+                <a href="#" class="underline">Preciso de Ajuda</a>
+                <a href="#" class="underline">Política de Privacidade</a>
             </footer>
         </div>
 

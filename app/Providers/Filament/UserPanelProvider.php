@@ -32,7 +32,7 @@ class UserPanelProvider extends PanelProvider
             ->login(
                 Login::class,
             )
-            ->font('Poppins')
+            ->font('Nexa')
             ->registration(Register::class)
             ->registrationRouteSlug('signup')
             ->passwordReset(

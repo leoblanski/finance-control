@@ -30,14 +30,14 @@ class Register extends BaseRegister
         return $form
             ->schema([
                 Forms\Components\TextInput::make('first_name')
-                    ->label('First Name')
+                    ->label('Nome')
                     ->columnSpan([
                         'default' => 2,
                         'md' => 1
                     ])
                     ->required(),
                 Forms\Components\TextInput::make('last_name')
-                    ->label('Last Name')
+                    ->label('Sobrenome')
                     ->columnSpan([
                         'default' => 2,
                         'md' => 1
@@ -45,13 +45,14 @@ class Register extends BaseRegister
                     ->required(),
                 $this->getEmailFormComponent()
                     ->columnSpan(2)
-                    ->label('Email Address')
+                    ->label('E-mail')
                     ->required(),
                 $this->getPasswordFormComponent()
+                    ->label('Senha')
                     ->columnSpan(2),
                 $this->getPasswordConfirmationFormComponent()
                     ->columnSpan(2)
-                    ->label('Confirm Password'),
+                    ->label('Confirmar senha'),
             ])
             ->statePath('data')
             ->columns([

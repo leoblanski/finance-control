@@ -41,15 +41,16 @@ class Login extends BaseAuth
 
                         return new HtmlString(
                             Blade::render('
-                                <span>Don\'t have an account? </span>
-                                <a href="{{filament()->getRegistrationUrl()}}" color="primary" class="text-primary font-bold underline">Sign Up</a>
+                                <span>Não possui uma conta?</span>
+                                <a href="{{filament()->getRegistrationUrl()}}" color="primary" class="text-primary font-bold underline">Se cadastrar</a>
                             ')
                         );
                     }),
                 $this->getPasswordFormComponent()
+                    ->label('Senha')
                     ->hint(null),
                 $this->getRememberFormComponent()
-                    ->label('Keep me logged in'),
+                    ->label('Manter conectado'),
             ])
             ->statePath('data');
     }
@@ -133,7 +134,7 @@ class Login extends BaseAuth
     protected function getLoginEmailFormComponent()
     {
         return TextInput::make('login')
-            ->label('E-mail or Username')
+            ->label('E-mail ou Usuário')
             ->required()
             ->autocomplete()
             ->autofocus()
