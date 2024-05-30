@@ -79,11 +79,11 @@ class ConfirmSignup extends Page
 
     public function mount()
     {
+        $this->form->fill();
         $this->email = request()->email;
         $this->token = request()->token;
         $user = User::where('email', $this->email)->where('remember_token', $this->token)->firstOrFail();
         $this->quote = (new AuthQuoteService())->getQuote();
-
         auth()->login($user);
 
         Notification::make()
@@ -97,6 +97,7 @@ class ConfirmSignup extends Page
     public function completeSignup()
     {
         $data = $this->form->getState();
+
         $data['remember_token'] = null;
         $user = User::where('email', $this->email)->firstOrFail();
 
