@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Services\AuthQuoteService;
 use Filament\Facades\Filament;
 use App\Jobs\DispatchEmail;
+use App\Models\Brand;
 
 class Register extends BaseRegister
 {
@@ -43,6 +44,12 @@ class Register extends BaseRegister
                         'md' => 1
                     ])
                     ->required(),
+                Forms\Components\TextInput::make('username')
+                    ->label('Usuário')
+                    ->required()
+                    ->columnSpan([
+                        'default' => 2,
+                    ]),
                 $this->getEmailFormComponent()
                     ->columnSpan(2)
                     ->label('E-mail')
@@ -68,30 +75,38 @@ class Register extends BaseRegister
 
     private function createUser()
     {
-        $team = Team::create([
-            'brand_name' => 'Company'
+        $data = $this->form->getState();
+
+        $users = User::where('username', $data['username'])
+            ->orWhere('email', $data['email'])
+            ->count();
+
+        if ($users > 0) {
+            Notification::make()
+                ->title('Error')
+                ->danger()
+                ->body('Username already exists. Please choose another one.')
+                ->send();
+
+            return null;
+        }
+
+        if ($data['username'] === null) {
+            $data['username'] = $data['email'];
+        }
+
+        $brand = Brand::create([
+            'name' => 'Loja Virtual',
+            'email' => $data['email'],
+            'active' => true
         ]);
 
-        $data = $this->form->getState();
         $data['remember_token'] = $this->rememberToken;
-        $data['is_active'] = true;
-        $data['team_id'] = $team->id;
+        $data['active'] = true;
+        $data['brand_id'] = $brand->id;
 
         $user = $this->getUserModel()::create($data)
             ->assignRole(Role::findByName(Role::MANAGER_ROLE));
-
-        // proposal default email template
-        EmailTemplate::create([
-            'team_id' => $team->id,
-            'name' => 'Proposal',
-            'subject' => 'Your Trip Proposal',
-            'category' => 'trip',
-            'body' =>
-            "<p>Your new proposal for %|trip.title|% is ready. If you have any questions or changes, just let me know.<br><br><a href='" .
-                env('APP_URL') .
-                "proposals/%|proposal.url|%'>View Proposal</a></p>",
-            'is_active' => true,
-        ]);
 
         return $user;
     }

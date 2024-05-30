@@ -8,7 +8,7 @@
                 {{ $this->form }}
 
                 <x-filament::button type="submit" variant="primary" :form="$this->form" wire:target="register">
-                    Comece seu teste pelo período de 30 dias
+                    Iniciar teste grátis
                 </x-filament::button>
                 <p class="text-center text-xs">Não é necessário cartão de crédito</p>
             </x-filament-panels::form>

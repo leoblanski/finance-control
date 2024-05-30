@@ -16,8 +16,18 @@ class Brand extends Model
      * @var array
      */
     protected $fillable = [
-        'brand_id',
         'name',
+        'phone',
+        'email',
+        'website',
+        'logo',
+        'address',
+        'city',
+        'state',
+        'zip',
+        'country',
+        'primary_color',
+        'secondary_color',
         'active',
         'user_id',
     ];
@@ -29,7 +39,7 @@ class Brand extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'brand_id' => 'integer',
+
         'active' => 'boolean',
         'user_id' => 'integer',
     ];

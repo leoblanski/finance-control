@@ -15,6 +15,17 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->string('name');
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('website')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('country')->nullable();
+            $table->string('primary_color')->nullable();
+            $table->string('secondary_color')->nullable();
             $table->boolean('active');
             $table->foreignId('user_id')->nullable();
             $table->timestamps();

@@ -24,6 +24,15 @@ class BrandFactory extends Factory
         return [
             'brand_id' => $this->faker->randomNumber(),
             'name' => $this->faker->name(),
+            'phone' => $this->faker->phoneNumber(),
+            'email' => $this->faker->safeEmail(),
+            'website' => $this->faker->url(),
+            'logo' => $this->faker->word(),
+            'address' => $this->faker->address(),
+            'city' => $this->faker->city(),
+            'state' => $this->faker->state(),
+            'zip' => $this->faker->postcode(),
+            'country' => $this->faker->country(),
             'active' => $this->faker->boolean(),
             'user_id' => User::factory(),
         ];

@@ -3,15 +3,17 @@
 namespace App\Models;
 
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, HasName
 {
     use HasFactory;
     use HasRoles;
+    // use HasName;
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +21,11 @@ class User extends Authenticatable implements FilamentUser
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'username',
+        'active',
+        'remember_token',
         'email',
         'email_verified_at',
         'password',
@@ -48,5 +54,20 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getFilamentName(): string
+    {
+        return "test";
     }
 }

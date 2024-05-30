@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         $this->command->info('Creating admin user...');
 
         User::factory()->create([
-            'name' => 'Admin',
+            'first_name' => 'Admin',
             'email' => 'admin@admin.com',
             'username' => 'admin',
             'password' => Hash::make('123123'),
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
         $this->command->info('Creating manager user...');
 
         User::factory()->create([
-            'name' => 'Manager',
+            'first_name' => 'Manager',
             'email' => 'manager@manager.com',
             'username' => 'manager',
             'password' => Hash::make('123123'),
@@ -37,7 +37,8 @@ class UserSeeder extends Seeder
         $this->command->info('Creating team member user...');
 
         User::factory()->create([
-            'name' => 'Team Member',
+            'first_name' => 'Team',
+            'last_name' => 'Member',
             'email' => 'team@team.com',
             'username' => 'team',
             'password' => Hash::make('123123'),

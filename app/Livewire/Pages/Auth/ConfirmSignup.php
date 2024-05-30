@@ -29,24 +29,24 @@ class ConfirmSignup extends Page
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('company_name')
-                    ->label('Company Name'),
-                Forms\Components\TextInput::make('phone_number')
-                    ->label('Company Phone Number')
-                    ->mask('(999) 999-9999'),
+                Forms\Components\TextInput::make('name')
+                    ->label('Nome da Loja'),
+                Forms\Components\TextInput::make('phone')
+                    ->label('Contato')
+                    ->mask('(55) 99999-9999'),
                 Forms\Components\FileUpload::make('logo')
-                    ->label('Upload your company logo')
-                    ->disk('s3')
+                    ->label('Associe a logo da empresa')
+                    // ->disk('s3')
                     ->directory('brand-logos')
                     ->imageEditor()
                     ->imageEditorViewportWidth('1920')
                     ->imageEditorViewportHeight('500'),
-                Forms\Components\FileUpload::make('avatar')
-                    ->label('Upload a profile photo')
-                    ->disk('s3')
-                    ->visibility('public')
-                    ->directory('profile_image')
-                    ->imageEditor(),
+                // Forms\Components\FileUpload::make('avatar')
+                //     ->label('Upload a profile photo')
+                //     ->disk('s3')
+                //     ->visibility('public')
+                //     ->directory('profile_image')
+                //     ->imageEditor(),
             ])
             ->statePath('data');
     }
@@ -72,31 +72,31 @@ class ConfirmSignup extends Page
     {
         $data = $this->form->getState();
         $data['remember_token'] = null;
+        dd(1);
         $user = User::where('email', $this->email)->firstOrFail();
 
         $user->update([
-            'is_active' => true,
-            'phone_number' => $data['phone_number'],
-            'avatar' => $data['avatar'],
+            'ative' => true,
             'email_verified_at' => now(),
         ]);
 
-        $user->team->update([
-            'brand_name' => $data['company_name'] != '' ? $data['company_name'] : 'Company',
-            'brand_logo' => $data['logo'] ?? null,
-            'phone_number' => $data['phone_number'] ?? null,
-            'brand_primary_color' => '#7104ed',
-            'brand_secondary_color' => '#ffffff',
+        $user->brand->update([
+            'name' => $data['name'] != '' ? $data['name'] : 'Loja Virtual',
+            'email' => $user->email,
+            'logo' => $data['logo'] ?? null,
+            'phone' => $data['phone'] ?? null,
+            'primary_color' => '#ef7d00',
+            'secondary_color' => '#ffffff',
         ]);
 
-        $customerUSAePay = new Customer();
-        $customerUSAePay->setFirstName($user->first_name)
-            ->setLastName($user->last_name)
-            ->setCompany($user->team->brand_name)
-            ->setEmail($user->email)
-            ->setPhone($user->phone_number ?? '');
+        // $customerUSAePay = new Customer();
+        // $customerUSAePay->setFirstName($user->first_name)
+        //     ->setLastName($user->last_name)
+        //     ->setCompany($user->team->brand_name)
+        //     ->setEmail($user->email)
+        //     ->setPhone($user->phone_number ?? '');
 
-        app(USAePayBillingService::class)->createCustomer($customerUSAePay);
+        // app(USAePayBillingService::class)->createCustomer($customerUSAePay);
 
         Notification::make()
             ->title('Success')
