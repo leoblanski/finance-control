@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
-class SetTeamSettings
+class SetBrandSettings
 {
     /**
      * Handle an incoming request.
@@ -36,15 +36,15 @@ class SetTeamSettings
         }
 
         try {
-            $logoUrl = $brand->logo != null ? s3File($brand->logo) : null;
+            $logoUrl = $brand?->logo ? Storage::url($brand?->logo) : null;
         } catch (\InvalidArgumentException $e) {
             $logoUrl = null;
             report($e);
         }
 
         $panel = filament()->getPanel('user')
-            ->brandName($brand?->name);
-        // ->brandLogo($logoUrl);
+            ->brandName($brand?->name)
+            ->brandLogo($logoUrl);
 
         return $next($request);
     }

@@ -2,9 +2,10 @@
 
 namespace App\Traits;
 
+use App\Scopes\BrandScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-trait BelongsToTeam
+trait BelongsToBrand
 {
     protected static function bootBelongsToBrand()
     {

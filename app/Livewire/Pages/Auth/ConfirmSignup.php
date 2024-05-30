@@ -30,12 +30,34 @@ class ConfirmSignup extends Page
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label('Nome da Loja'),
+                    ->label('Nome da Loja')
+                    ->required()
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('phone')
                     ->label('Contato')
-                    ->mask('(55) 99999-9999'),
+                    ->required()
+                    ->columnSpanFull()
+                    ->placeholder('(99) 99999-9999')
+                    ->mask('(99) 99999-9999'),
+
+                Forms\Components\ColorPicker::make('primary_color')
+                    ->label('Cor Primária')
+                    ->columnSpan([
+                        'default' => 2,
+                        'md' => 1
+                    ]),
+
+                Forms\Components\ColorPicker::make('secondary_color')
+                    ->label('Cor Secundária')
+                    ->columnSpan([
+                        'default' => 2,
+                        'md' => 1
+                    ]),
+
                 Forms\Components\FileUpload::make('logo')
-                    ->label('Associe a logo da empresa')
+                    ->label('Associe a logo da loja')
+                    ->columnSpanFull()
+
                     // ->disk('s3')
                     ->directory('brand-logos')
                     ->imageEditor()
@@ -48,7 +70,11 @@ class ConfirmSignup extends Page
                 //     ->directory('profile_image')
                 //     ->imageEditor(),
             ])
-            ->statePath('data');
+            ->statePath('data')
+            ->columns([
+                'default' => 1,
+                'md' => 2
+            ]);
     }
 
     public function mount()
@@ -61,9 +87,9 @@ class ConfirmSignup extends Page
         auth()->login($user);
 
         Notification::make()
-            ->title('Success')
+            ->title('Successo!')
             ->success()
-            ->body('Account created successfully!')
+            ->body('Loja criada com sucesso!')
             ->send()
             ->seconds(15);
     }
@@ -72,7 +98,6 @@ class ConfirmSignup extends Page
     {
         $data = $this->form->getState();
         $data['remember_token'] = null;
-        dd(1);
         $user = User::where('email', $this->email)->firstOrFail();
 
         $user->update([
@@ -85,8 +110,8 @@ class ConfirmSignup extends Page
             'email' => $user->email,
             'logo' => $data['logo'] ?? null,
             'phone' => $data['phone'] ?? null,
-            'primary_color' => '#ef7d00',
-            'secondary_color' => '#ffffff',
+            'primary_color' => $data['primary_color'] ?? '#ef7d00',
+            'secondary_color' => $data['secondary_color'] ?? '#000000',
         ]);
 
         // $customerUSAePay = new Customer();
@@ -99,9 +124,9 @@ class ConfirmSignup extends Page
         // app(USAePayBillingService::class)->createCustomer($customerUSAePay);
 
         Notification::make()
-            ->title('Success')
+            ->title('Successo!')
             ->success()
-            ->body('Setup finished successfully!')
+            ->body('Loja criada com sucesso!')
             ->seconds(15)
             ->send();
 

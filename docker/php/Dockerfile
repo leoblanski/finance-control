@@ -25,7 +25,7 @@ RUN apk update && \
     libtool \
     libzip-dev \
     build-base \
-    autoconf
+    autoconf 
 
 RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install xdebug-stable \

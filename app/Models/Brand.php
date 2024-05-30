@@ -39,9 +39,10 @@ class Brand extends Model
      */
     protected $casts = [
         'id' => 'integer',
-
         'active' => 'boolean',
         'user_id' => 'integer',
+        'primary_color' => 'string',
+        'secondary_color' => 'string',
     ];
 
     public function user(): BelongsTo

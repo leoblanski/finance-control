@@ -5,6 +5,8 @@ namespace App\Providers\Filament;
 use App\Filament\Auth\Login;
 use App\Filament\Auth\PasswordReset\RequestPasswordReset;
 use App\Filament\Auth\Register;
+use App\Http\Middleware\SetBrandSettings;
+use App\Http\Middleware\ValidateUserStatus;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -39,19 +41,7 @@ class UserPanelProvider extends PanelProvider
                 RequestPasswordReset::class
             )
             ->colors([
-                'primary' =>  [
-                    50 => '255, 247, 237',    // Lighter
-                    100 => '255, 237, 213',   // Lighter
-                    200 => '254, 215, 170',   // Lighter
-                    300 => '253, 186, 116',   // Lighter
-                    400 => '251, 146, 60',    // Lighter
-                    500 => '249, 115, 22',    // Base color: slightly lighter than the original #ef7d00
-                    600 => '234, 88, 12',     // Darker
-                    700 => '194, 65, 12',     // Darker
-                    800 => '154, 52, 18',     // Darker
-                    900 => '124, 45, 18',     // Darker
-                    950 => '67, 20, 7',       // Darkest
-                ]
+                'primary' =>  Color::Amber
             ])
             ->globalSearch(true)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
@@ -67,13 +57,15 @@ class UserPanelProvider extends PanelProvider
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
-                StartSession::class,
                 AuthenticateSession::class,
+                StartSession::class,
+                ValidateUserStatus::class,
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                SetBrandSettings::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
