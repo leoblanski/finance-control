@@ -9,6 +9,8 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -16,6 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
+
+    protected static ?string $pluralModelLabel = 'Clientes';
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
@@ -30,19 +34,14 @@ class CustomerResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ->columns(Customer::getColumns())
             ->filters([
-                //
+                SelectFilter::make('active')
+                    ->options([
+                        'true' => 'Ativo',
+                        'false' => 'Inativo',
+                    ])
+                    ->label('Status'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

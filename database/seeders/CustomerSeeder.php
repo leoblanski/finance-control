@@ -16,6 +16,6 @@ class CustomerSeeder extends Seeder
     {
         $this->command->info('Creating customer...');
 
-        Customer::factory()->create();
+        Customer::factory()->count(10)->create();
     }
 }

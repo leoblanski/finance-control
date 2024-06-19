@@ -18,12 +18,15 @@ return new class extends Migration
             $table->string('cpf')->nullable();
             $table->timestamp('birthday')->nullable();
             $table->string('mobile')->nullable();
+            $table->string('email')->nullable();
             $table->string('cep')->nullable();
+            $table->string('street')->nullable();
+            $table->string('number')->nullable();
+            $table->string('complement')->nullable();
+            $table->string('neighborhood')->nullable();
             $table->string('state')->nullable();
             $table->string('city')->nullable();
-            $table->string('neighborhood')->nullable();
             $table->boolean('active');
-            $table->string('complement')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->timestamps();
         });
