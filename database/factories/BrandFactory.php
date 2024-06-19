@@ -22,7 +22,6 @@ class BrandFactory extends Factory
     public function definition(): array
     {
         return [
-            'brand_id' => $this->faker->randomNumber(),
             'name' => $this->faker->name(),
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->safeEmail(),

@@ -31,14 +31,7 @@ class Register extends BaseRegister
         return $form
             ->schema([
                 Forms\Components\TextInput::make('first_name')
-                    ->label('Nome')
-                    ->columnSpan([
-                        'default' => 2,
-                        'md' => 1
-                    ])
-                    ->required(),
-                Forms\Components\TextInput::make('last_name')
-                    ->label('Sobrenome')
+                    ->label('Nome Completo')
                     ->columnSpan([
                         'default' => 2,
                         'md' => 1

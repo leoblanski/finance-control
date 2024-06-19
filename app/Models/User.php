@@ -23,8 +23,7 @@ class User extends Authenticatable implements FilamentUser, HasName
      */
     protected $fillable = [
         'brand_id',
-        'first_name',
-        'last_name',
+        'name',
         'username',
         'active',
         'remember_token',
@@ -61,11 +60,6 @@ class User extends Authenticatable implements FilamentUser, HasName
     public function isActive(): bool
     {
         return $this->active;
-    }
-
-    public function getFullName(): string
-    {
-        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function getFilamentName(): string

@@ -19,7 +19,7 @@ class OperationTypeSeeder extends Seeder
         OperationType::factory()->create([
             'name' => 'Entrada de Mercadoria',
         ]);
-        
+
         OperationType::factory()->create([
             'name' => 'Venda de Mercadoria',
             'type' => 'S',
