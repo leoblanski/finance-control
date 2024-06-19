@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            BrandSeeder::class,
             RolesAndPermissionsSeeder::class,
             UserSeeder::class,
             OperationTypeSeeder::class,
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
             DefaultProductFieldsSeeder::class,
             StoreSeeder::class,
             CustomerSeeder::class,
+            ProductSeeder::class,
             EmployeeSeeder::class,
         ]);
     }

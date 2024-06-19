@@ -24,7 +24,7 @@ class BrandStoreFactory extends Factory
     {
         return [
             'store_id' => Store::factory(),
-            'brand_id' => Brand::factory(),
+            'brand_id' => 1,
         ];
     }
 }

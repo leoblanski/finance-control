@@ -24,7 +24,7 @@ class CustomerDependentFactory extends Factory
     public function definition(): array
     {
         return [
-            'brand_id' => Brand::factory(),
+            'brand_id' => 1,
             'name' => $this->faker->name(),
             'user_id' => User::factory(),
             'dependent_type_id' => DependentType::factory(),

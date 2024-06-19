@@ -23,7 +23,7 @@ class MovimentPaymentFactory extends Factory
     public function definition(): array
     {
         return [
-            'brand_id' => Brand::factory(),
+            'brand_id' => 1,
             'payment_type_id' => PaymentType::factory(),
             'moviment_id' => Moviment::factory(),
             'amount' => $this->faker->randomFloat(0, 0, 9999999999.),

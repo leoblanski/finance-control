@@ -22,11 +22,11 @@ class BrandFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->company(),
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->safeEmail(),
             'website' => $this->faker->url(),
-            'logo' => $this->faker->word(),
+            'logo' => null,
             'address' => $this->faker->address(),
             'city' => $this->faker->city(),
             'state' => $this->faker->state(),

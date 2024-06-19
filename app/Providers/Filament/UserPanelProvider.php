@@ -7,6 +7,7 @@ use App\Filament\Auth\PasswordReset\RequestPasswordReset;
 use App\Filament\Auth\Register;
 use App\Http\Middleware\SetBrandSettings;
 use App\Http\Middleware\ValidateUserStatus;
+use App\Listeners\Login\SetConfigsInSession;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;

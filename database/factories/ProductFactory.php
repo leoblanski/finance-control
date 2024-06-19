@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\ProductBrand;
+use App\Models\ProductCategory;
 use App\Models\ProductLine;
 
 class ProductFactory extends Factory
@@ -25,18 +26,18 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'brand_id' => Brand::factory(),
-            'name' => $this->faker->name(),
+            'brand_id' => 1,
+            'name' => $this->faker->title(),
             'description' => $this->faker->text(),
             'reference' => $this->faker->word(),
-            'user_id' => User::factory(),
             'product_brand_id' => ProductBrand::factory(),
             'product_line_id' => ProductLine::factory(),
             'product_category_id' => ProductCategory::factory(),
-            'codebar' => $this->faker->word(),
+            'codebar' => $this->faker->randomDigitNotZero(),
             'active' => $this->faker->boolean(),
-            'cost_price' => $this->faker->randomFloat(0, 0, 9999999999.),
-            'sale_price' => $this->faker->randomFloat(0, 0, 9999999999.),
+            'cost_price' => $this->faker->randomFloat(2, 0, 999),
+            'sale_price' => $this->faker->randomFloat(2, 0, 999),
+            'user_id' => User::factory(),
         ];
     }
 }

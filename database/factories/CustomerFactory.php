@@ -23,7 +23,7 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         return [
-            'brand_id' => Brand::factory(),
+            'brand_id' => 1,
             'name' => $this->faker->name(),
             'cpf' => $this->faker->cpf(),
             'birthday' => $this->faker->dateTime(),

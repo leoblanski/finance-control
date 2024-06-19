@@ -26,7 +26,7 @@ class MovimentFactory extends Factory
     public function definition(): array
     {
         return [
-            'brand_id' => Brand::factory(),
+            'brand_id' => 1,
             'user_id' => User::factory(),
             'store_id' => Store::factory(),
             'customer_id' => Customer::factory(),

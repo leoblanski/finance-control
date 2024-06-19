@@ -23,7 +23,7 @@ class ProductBalanceFactory extends Factory
     public function definition(): array
     {
         return [
-            'brand_id' => Brand::factory(),
+            'brand_id' => 1,
             'product_id' => Product::factory(),
             'qty' => $this->faker->numberBetween(-10000, 10000),
         ];

@@ -23,7 +23,7 @@ class SaleTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'brand_id' => Brand::factory(),
+            'brand_id' => 1,
             'name' => $this->faker->name(),
             'active' => $this->faker->boolean(),
             'user_id' => User::factory(),
