@@ -24,7 +24,7 @@ class EmployeeFactory extends Factory
     public function definition(): array
     {
         return [
-            'brand_id' => Brand::factory(),
+            'brand_id' => 1,
             'name' => $this->faker->name(),
             'store_id' => Store::factory(),
             'active' => $this->faker->boolean(),

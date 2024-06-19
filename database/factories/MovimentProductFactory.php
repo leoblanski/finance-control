@@ -23,7 +23,7 @@ class MovimentProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'brand_id' => Brand::factory(),
+            'brand_id' => 1,
             'product_id' => Product::factory(),
             'moviment_id' => Moviment::factory(),
             'unit_price' => $this->faker->randomFloat(0, 0, 9999999999.),

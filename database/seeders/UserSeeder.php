@@ -28,6 +28,7 @@ class UserSeeder extends Seeder
         $this->command->info('Creating manager user...');
 
         User::factory()->create([
+            'brand_id' => 1,
             'name' => 'Manager',
             'email' => 'manager@manager.com',
             'username' => 'manager',
@@ -37,6 +38,7 @@ class UserSeeder extends Seeder
         $this->command->info('Creating team member user...');
 
         User::factory()->create([
+            'brand_id' => 1,
             'name' => 'Team',
             'email' => 'team@team.com',
             'username' => 'team',

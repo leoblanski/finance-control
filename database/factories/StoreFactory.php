@@ -23,7 +23,7 @@ class StoreFactory extends Factory
     public function definition(): array
     {
         return [
-            'brand_id' => Brand::factory(),
+            'brand_id' => 1,
             'name' => $this->faker->name(),
             'cnpj' => $this->faker->word(),
             'user_id' => User::factory(),

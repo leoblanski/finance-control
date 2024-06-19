@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\BelongsToBrand;
 use App\Traits\BelongsToUser;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Section;
@@ -80,6 +81,13 @@ class Customer extends Model
                     PhoneNumber::make('mobile')
                         ->label('Celular')
                         ->prefixIcon('heroicon-o-phone')
+                        ->suffixAction(function () {
+                            return Action::make('send_sms')
+                                ->icon('heroicon-o-chat-bubble-oval-left-ellipsis')
+                                ->label('Enviar Whatsapp')
+                                ->url(fn (Customer $customer) => "https://api.whatsapp.com/send?phone=55{$customer->mobile}")
+                                ->openUrlInNewTab();
+                        })
                         ->maxLength(255),
                     TextInput::make('email')
                         ->prefixIcon('heroicon-o-envelope')
@@ -169,10 +177,12 @@ class Customer extends Model
                 ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('birthday')
                 ->label('Data de Nascimento')
+                ->searchable()
                 ->date('d/m/Y')
                 ->sortable(),
             TextColumn::make('mobile')
                 ->label('Celular')
+                ->sortable()
                 ->searchable(),
             TextColumn::make('cep')
                 ->label('CEP')
@@ -180,16 +190,20 @@ class Customer extends Model
                 ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('state')
                 ->label('Estado')
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true)
                 ->searchable(),
             TextColumn::make('city')
                 ->label('Cidade')
+                ->sortable()
                 ->searchable(),
             TextColumn::make('neighborhood')
                 ->label('Bairro')
-                ->toggleable(isToggledHiddenByDefault: true)
+                ->sortable()
                 ->searchable(),
             IconColumn::make('active')
                 ->label('Ativo')
+                ->sortable()
                 ->boolean(),
             // TextColumn::make('last_sale')
             //     ->dateTime()
