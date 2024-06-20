@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('product_brand_id')->nullable();
             $table->foreignId('product_line_id')->nullable();
             $table->foreignId('product_category_id')->nullable();
+            $table->json('photos')->nullable();
             $table->string('codebar')->nullable();
             $table->boolean('active');
             $table->decimal('cost_price');

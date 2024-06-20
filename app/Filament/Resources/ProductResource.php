@@ -16,86 +16,20 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-home-modern';
+    protected static ?string $navigationGroup = 'Estoque';
+    protected static ?string $pluralModelLabel = 'Produtos';
 
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\Select::make('brand_id')
-                    ->relationship('brand', 'name'),
-                Forms\Components\TextInput::make('name')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('description')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('reference')
-                    ->maxLength(255),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name'),
-                Forms\Components\Select::make('product_brand_id')
-                    ->relationship('productBrand', 'name'),
-                Forms\Components\Select::make('product_line_id')
-                    ->relationship('productLine', 'name'),
-                Forms\Components\Select::make('product_category_id')
-                    ->relationship('productCategory', 'name'),
-                Forms\Components\TextInput::make('codebar')
-                    ->maxLength(255),
-                Forms\Components\Toggle::make('active')
-                    ->required(),
-                Forms\Components\TextInput::make('cost_price')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('sale_price')
-                    ->required()
-                    ->numeric(),
-            ]);
+            ->schema(Product::getForm())->columns(3);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('brand.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('reference')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('productBrand.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('productLine.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('productCategory.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('codebar')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('active')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('cost_price')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sale_price')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ->columns(Product::getColumns())
             ->filters([
                 //
             ])
