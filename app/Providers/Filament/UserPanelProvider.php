@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Filament\Auth\Login;
 use App\Filament\Auth\PasswordReset\RequestPasswordReset;
 use App\Filament\Auth\Register;
+use App\Filament\Pages\Dashboard;
 use App\Http\Middleware\SetBrandSettings;
 use App\Http\Middleware\ValidateUserStatus;
 use App\Listeners\Login\SetConfigsInSession;
@@ -25,6 +26,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Leandrocfe\FilamentApexCharts\FilamentApexChartsPlugin;
 
 class UserPanelProvider extends PanelProvider
 {
@@ -50,7 +52,7 @@ class UserPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
@@ -73,6 +75,9 @@ class UserPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->viteTheme('resources/css/app.css');
+            ->viteTheme('resources/css/app.css')
+            ->plugins([
+                FilamentApexChartsPlugin::make()
+            ]);
     }
 }
