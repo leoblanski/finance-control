@@ -22,7 +22,6 @@ class User extends Authenticatable implements FilamentUser, HasName
      * @var array
      */
     protected $fillable = [
-        'brand_id',
         'name',
         'username',
         'active',
@@ -65,10 +64,5 @@ class User extends Authenticatable implements FilamentUser, HasName
     public function getFilamentName(): string
     {
         return "test";
-    }
-
-    public function brand(): BelongsTo
-    {
-        return $this->belongsTo(Brand::class);
     }
 }

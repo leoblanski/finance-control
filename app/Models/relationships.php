@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PaymentType extends Model
+class Relationships extends Model
 {
     use HasFactory;
 
@@ -15,9 +15,7 @@ class PaymentType extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'description',
-        'active',
+        'belongsTo',
     ];
 
     /**
@@ -27,6 +25,5 @@ class PaymentType extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'active' => 'boolean',
     ];
 }

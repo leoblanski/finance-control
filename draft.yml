@@ -1,209 +1,22 @@
 models:
-  User:
+  Category:
     name: String
-    email: String unique
-    email_verified_at: Timestamp nullable
-    password: String
-    remember_token: String nullable
+    description: Text nullable
+    active: Boolean default:true
     timestamps: Timestamps
 
-  # Customer:
-  #   brand_id: UnsignedBigInteger nullable
-  #   name: String
-  #   cpf: String nullable
-  #   birthday: Timestamp nullable
-  #   mobile: String nullable
-  #   cep: String nullable
-  #   state: String nullable
-  #   city: String nullable
-  #   neighborhood: String nullable
-  #   active: Boolean
-  #   complement: String nullable
-  #   user_id: UnsignedBigInteger nullable
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User
-  #     hasMany: CustomerDependent
+  PaymentType:
+    name: String
+    description: Text nullable
+    active: Boolean default:true
+    timestamps: Timestamps
 
-  # Store:
-  #   brand_id: UnsignedBigInteger nullable
-  #   name: String
-  #   cnpj: String nullable
-  #   user_id: UnsignedBigInteger nullable
-  #   responsible_name: String nullable
-  #   mobile: String nullable
-  #   active: Boolean
-  #   charge_date: Timestamp nullable
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User
-  #     hasMany: Employee
-
-  # Employee:
-  #   brand_id: UnsignedBigInteger nullable
-  #   name: String
-  #   store_id: UnsignedBigInteger nullable
-  #   active: Boolean
-  #   user_id: UnsignedBigInteger nullable
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User, Store
-
-  # ProductBrand:
-  #   brand_id: UnsignedBigInteger nullable
-  #   name: String
-  #   user_id: UnsignedBigInteger nullable
-  #   active: Boolean
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User
-
-  # Product:
-  #   brand_id: UnsignedBigInteger nullable
-  #   name: String nullable
-  #   description: String nullable
-  #   reference: String nullable
-  #   user_id: UnsignedBigInteger nullable
-  #   product_brand_id: UnsignedBigInteger nullable
-  #   product_line_id: UnsignedBigInteger nullable
-  #   product_category_id: UnsignedBigInteger nullable
-  #   codebar: String nullable
-  #   active: Boolean
-  #   cost_price: Decimal
-  #   sale_price: Decimal
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User, ProductBrand, ProductLine, ProductCategory
-
-  # ProductCategory:
-  #   brand_id: UnsignedBigInteger nullable
-  #   name: String
-  #   user_id: UnsignedBigInteger nullable
-  #   active: Boolean
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User
-
-  # ProductLine:
-  #   brand_id: UnsignedBigInteger nullable
-  #   name: String
-  #   user_id: UnsignedBigInteger nullable
-  #   active: Boolean
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User
-
-  # DependentType:
-  #   name: String
-  #   active: Boolean
-  #   timestamps: Timestamps
-
-  # CustomerDependent:
-  #   brand_id: UnsignedBigInteger nullable
-  #   name: String
-  #   user_id: UnsignedBigInteger nullable
-  #   dependent_type_id: UnsignedBigInteger nullable
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User, DependentType
-
-  # ProductBalance:
-  #   brand_id: UnsignedBigInteger nullable
-  #   product_id: UnsignedBigInteger nullable
-  #   qty: Integer
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, Product
-
-  # UserStore:
-  #   brand_id: UnsignedBigInteger nullable
-  #   user_id: UnsignedBigInteger nullable
-  #   store_id: UnsignedBigInteger nullable
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User, Store
-
-  # Payment:
-  #   brand_id: UnsignedBigInteger nullable
-  #   name: String
-  #   user_id: UnsignedBigInteger nullable
-  #   active: Boolean
-  #   payment_type_id: UnsignedBigInteger nullable
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User, PaymentType
-
-  # PaymentType:
-  #   name: String
-  #   active: Boolean
-  #   timestamps: Timestamps
-
-  # MovimentPayment:
-  #   brand_id: UnsignedBigInteger nullable
-  #   payment_type_id: UnsignedBigInteger nullable
-  #   moviment_id: UnsignedBigInteger nullable
-  #   amount: Decimal
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, PaymentType, Moviment
-
-  # MovimentProduct:
-  #   brand_id: UnsignedBigInteger nullable
-  #   product_id: UnsignedBigInteger nullable
-  #   moviment_id: UnsignedBigInteger nullable
-  #   unit_price: Decimal
-  #   qty: Integer
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, Product, Moviment
-
-  # OperationType:
-  #   brand_id: UnsignedBigInteger nullable
-  #   name: String
-  #   type: String
-  #   active: Boolean
-  #   user_id: UnsignedBigInteger nullable
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User
-
-  # Moviment:
-  #   brand_id: UnsignedBigInteger nullable
-  #   user_id: UnsignedBigInteger nullable
-  #   store_id: UnsignedBigInteger nullable
-  #   customer_id: UnsignedBigInteger nullable
-  #   employee_id: UnsignedBigInteger nullable
-  #   status: UnsignedBigInteger
-  #   type: String
-  #   operation_type_id: UnsignedBigInteger nullable
-  #   amount: Decimal
-  #   discount: Decimal
-  #   obs: String nullable
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User, Store, Customer, Employee, OperationType
-
-  # Brand:
-  #   brand_id: UnsignedBigInteger nullable
-  #   name: String
-  #   active: Boolean
-  #   timestamps: Timestamps
-  #   user_id: UnsignedBigInteger nullable
-  #   relationships:
-  #     belongsTo: User
-
-  # BrandStore:
-  #   store_id: UnsignedBigInteger nullable
-  #   brand_id: UnsignedBigInteger nullable
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Store, Brand
-
-  # SaleType:
-  #   brand_id: UnsignedBigInteger nullable
-  #   name: String
-  #   active: Boolean
-  #   user_id: UnsignedBigInteger nullable
-  #   timestamps: Timestamps
-  #   relationships:
-  #     belongsTo: Brand, User
+  Transaction:
+    user_id: UnsignedBigInteger
+    category_id: UnsignedBigInteger
+    payment_type_id: UnsignedBigInteger
+    description: Text nullable
+    value: Decimal
+    date: Date
+    relationships:
+      belongsTo: User, Category, PaymentType

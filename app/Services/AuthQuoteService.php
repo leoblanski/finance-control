@@ -7,39 +7,38 @@ class AuthQuoteService
     private $quotes = [
         [
             'quote' =>
-            'O Sistema de Controle de Vendas revolucionou a forma como gerencio meu negócio e elaboro propostas incríveis,
-                 permitindo que eu me concentre no que faço de melhor: vender.
-                 É verdadeiramente a minha solução única para tudo relacionado a vendas!',
+            'O Sistema de Controle de Transações Financeiras simplificou o gerenciamento das minhas finanças pessoais.
+                 Agora, posso categorizar despesas e receitas facilmente e ter uma visão clara do meu orçamento.',
             'author' => 'Ana Silva',
-            'company' => 'Proprietária da Franquia Vendas Mais',
+            'company' => 'Usuária Pessoal',
         ],
         [
             'quote' =>
-            'Lidar com os dados de clientes e informações de vendas de centenas de clientes recorrentes era esmagador.
-                 O Sistema de Controle de Vendas transformou esse caos em ordem, simplificando muito meu trabalho.',
+            'Antes do Sistema de Controle de Transações, era difícil acompanhar as entradas e saídas de dinheiro da minha empresa.
+                 Este sistema trouxe mais organização e eficiência, permitindo-me focar em estratégias de crescimento.',
             'author' => 'Carlos Pereira',
-            'company' => 'Gerente de Vendas, Sucesso Comercial',
+            'company' => 'Empresário, Sucesso Financeiro',
         ],
         [
             'quote' =>
-            'Antes do Sistema de Controle de Vendas, acompanhar as vendas e o inventário era um desafio constante.
-                 Agora, tudo está mais organizado e eficiente, o que nos permite focar no crescimento da empresa.',
+            'O sistema transformou a maneira como gerencio minhas finanças empresariais. Agora, tudo está bem categorizado e fácil de acessar,
+                 o que me ajuda a tomar decisões financeiras mais informadas.',
             'author' => 'Mariana Rodrigues',
-            'company' => 'Diretora de Operações, Top Vendas',
+            'company' => 'Diretora Financeira, Crescimento Certo',
         ],
         [
             'quote' =>
-            'A ferramenta facilitou a geração de relatórios detalhados, ajudando-nos a tomar decisões estratégicas mais assertivas.
-                 Recomendo a todos que buscam otimizar seu processo de vendas.',
+            'Com o Sistema de Controle de Transações, a geração de relatórios detalhados se tornou muito mais simples.
+                 Isso me ajuda a ter uma visão clara das minhas finanças e a tomar decisões mais estratégicas.',
             'author' => 'João Santos',
-            'company' => 'Consultor de Vendas, Alpha Soluções',
+            'company' => 'Consultor Financeiro, Alpha Finanças',
         ],
         [
             'quote' =>
-            'O sistema tornou a gestão de produtos e o acompanhamento de vendas muito mais fáceis.
-                 A interface intuitiva e os recursos robustos são inestimáveis para nossa equipe de vendas.',
+            'A gestão de despesas e receitas ficou muito mais fácil com este sistema. A interface intuitiva e os recursos robustos
+                 são inestimáveis para o meu controle financeiro pessoal.',
             'author' => 'Beatriz Almeida',
-            'company' => 'Coordenadora de Vendas, Vendas Brilhantes',
+            'company' => 'Usuária Pessoal',
         ],
     ];
 
@@ -49,3 +48,4 @@ class AuthQuoteService
         return $randomQuote;
     }
 }
+

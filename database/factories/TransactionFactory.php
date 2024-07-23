@@ -4,16 +4,18 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\PaymentType;
+use App\Models\;
+use App\Models\Transaction;
+use App\Models\User;
 
-class PaymentTypeFactory extends Factory
+class TransactionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = PaymentType::class;
+    protected $model = Transaction::class;
 
     /**
      * Define the model's default state.
@@ -21,9 +23,12 @@ class PaymentTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'user_id' => User::factory(),
+            'category_id' => ::factory(),
+            'payment_type_id' => ::factory(),
             'description' => $this->faker->text(),
-            'active' => $this->faker->boolean(),
+            'value' => $this->faker->randomFloat(0, 0, 9999999999.),
+            'date' => $this->faker->date(),
         ];
     }
 }
