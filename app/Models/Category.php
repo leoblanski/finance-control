@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\BadgeColumn;
@@ -9,6 +10,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Leandrocfe\FilamentPtbrFormFields\Money;
 
 class Category extends Model
 {
@@ -43,6 +45,9 @@ class Category extends Model
                 ->required(),
             TextInput::make('description')
                 ->label('Description'),
+            Money::make('limit')
+                ->label('Mensal Limit')
+                ->columnSpanFull(),
             Toggle::make('active')
                 ->label('Active')
                 ->default(true)
@@ -57,6 +62,11 @@ class Category extends Model
                 ->sortable()
                 ->searchable(),
             TextColumn::make('description')
+                ->sortable()
+                ->searchable(),
+            TextColumn::make('limit')
+                ->label('Limite Mensal')
+                ->formatStateUsing(fn (Category $category) => $category->limit ? 'R$ ' . number_format($category->limit, 2, ',', '.') : 'Sem limite')
                 ->sortable()
                 ->searchable(),
             ToggleColumn::make('active')
