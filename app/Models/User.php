@@ -5,6 +5,8 @@ namespace App\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -64,5 +66,51 @@ class User extends Authenticatable implements FilamentUser, HasName
     public function getFilamentName(): string
     {
         return "test";
+    }
+
+    public static function getForm(): array
+    {
+        return [
+            TextInput::make('name')
+                ->maxLength(255),
+            TextInput::make('email')
+                ->email()
+                ->required()
+                ->maxLength(255),
+            TextInput::make('username')
+                ->maxLength(255),
+            TextInput::make('password')
+                ->password()
+                ->required()
+                ->maxLength(255),
+            Toggle::make('active')
+                ->default(true)
+                ->required(),
+        ];
+    }
+
+    public static function getColumns(): array
+    {
+        return [
+            TextColumn::make('name')
+                ->searchable(),
+            TextColumn::make('email')
+                ->searchable(),
+            TextColumn::make('username')
+                ->searchable(),
+            IconColumn::make('active')
+                ->boolean(),
+            TextColumn::make('last_login_at')
+                ->dateTime()
+                ->sortable(),
+            TextColumn::make('created_at')
+                ->dateTime()
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
+            TextColumn::make('updated_at')
+                ->dateTime()
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
+        ];
     }
 }

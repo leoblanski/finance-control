@@ -2,7 +2,8 @@
 
 namespace App\Filament\Pages;
 
-use App\Filament\Widgets\TransactionChartPie;
+use App\Filament\Widgets\TransactionChartPieIn;
+use App\Filament\Widgets\TransactionChartPieOut;
 use App\Filament\Widgets\TransactionTotals;
 use App\Filament\Widgets\TransactionTotalStats;
 use Filament\Facades\Filament;
@@ -43,7 +44,8 @@ class Dashboard extends BaseDashboard
     {
         return [
             TransactionTotalStats::make(),
-            TransactionChartPie::make(),
+            TransactionChartPieOut::make(),
+            TransactionChartPieIn::make(),
         ];
     }
 }

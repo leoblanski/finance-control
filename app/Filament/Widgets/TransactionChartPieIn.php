@@ -4,12 +4,10 @@ namespace App\Filament\Widgets;
 
 use App\Models\Transaction;
 use Filament\Widgets\ChartWidget;
-use Flowframe\Trend\Trend;
-use Flowframe\Trend\TrendValue;
 
-class TransactionChartPie extends ChartWidget
+class TransactionChartPieIn extends ChartWidget
 {
-    protected static ?string $heading = 'Gastos por Categoria';
+    protected static ?string $heading = 'Receitas por Categoria';
 
     protected function getFilters(): ?array
     {
@@ -25,18 +23,30 @@ class TransactionChartPie extends ChartWidget
     {
         $activeFilter = $this->filter;
 
-        $data = Trend::model(Transaction::class)
-            ->between(
-                start: $activeFilter['startDate'] ?? now()->subMonth(),
-                end: $activeFilter['endDate'] ?? now(),
-            )
-            ->perMonth()
-            ->count();
+        match ($activeFilter) {
+            'today' => $activeFilter = [
+                'startDate' => now()->startOfDay(),
+                'endDate' => now()->endOfDay(),
+            ],
+            'week' => $activeFilter = [
+                'startDate' => now()->startOfWeek(),
+                'endDate' => now()->endOfWeek(),
+            ],
+            'month' => $activeFilter = [
+                'startDate' => now()->startOfMonth(),
+                'endDate' => now()->endOfMonth(),
+            ],
+            'year' => $activeFilter = [
+                'startDate' => now()->startOfYear(),
+                'endDate' => now()->endOfYear(),
+            ],
+            default => $activeFilter = [],
+        };
 
         $transaction = Transaction::query()
             ->selectRaw('categories.name as category, sum(transactions.value) as aggregate')
             ->join('categories', 'transactions.category_id', '=', 'categories.id')
-            ->where('transactions.value', '<', 0)
+            ->where('transactions.type', 'in')
             ->whereBetween('transactions.created_at', [
                 $activeFilter['startDate'] ?? now()->subMonth(),
                 $activeFilter['endDate'] ?? now(),

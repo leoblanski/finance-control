@@ -25,6 +25,7 @@ class Category extends Model
         'name',
         'description',
         'active',
+        'limit',
     ];
 
     /**
