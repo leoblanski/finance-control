@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToTeam;
+use App\Traits\BelongsToUser;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Radio;
@@ -19,6 +21,8 @@ use Leandrocfe\FilamentPtbrFormFields\Money;
 class Transaction extends Model
 {
     use HasFactory;
+    use BelongsToTeam;
+    use BelongsToUser;
 
     /**
      * The attributes that are mass assignable.
@@ -48,6 +52,11 @@ class Transaction extends Model
         // 'value' => 'decimal',
         'date' => 'date',
     ];
+
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
+    }
 
     public function user(): BelongsTo
     {

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToTeam;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
@@ -17,6 +18,7 @@ class User extends Authenticatable implements FilamentUser, HasName
     use HasFactory;
     use HasRoles;
     // use HasName;
+    use BelongsToTeam;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +33,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         'email',
         'email_verified_at',
         'password',
+        'team_id',
     ];
 
     /**
@@ -52,6 +55,11 @@ class User extends Authenticatable implements FilamentUser, HasName
         'id' => 'integer',
         'email_verified_at' => 'timestamp',
     ];
+
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
+    }
 
     public function canAccessPanel(Panel $panel): bool
     {

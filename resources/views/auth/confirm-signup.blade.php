@@ -5,14 +5,14 @@
 
         <div class="flex flex-row justify-center self-center">
             <x-filament-panels::form wire:submit.prevent="completeSignup" class="sm:w-4/5 md:w-3/5">
-                <x-filament-panels::header heading="Personalize Sua Empresa" />
+                <x-filament-panels::header heading="Personalize Seu Controle" />
 
                 {{ $this->form }}
 
                 <x-filament::button type="submit" variant="primary" :form="$this->form" wire:target="completeSignup">
                     Completar Cadastro
                 </x-filament::button>
-                <span class="text-xs hover:cursor-pointer flex justify-around" wire:click="completeSignup">Irei fazer
+                <span class="text-xs hover:cursor-pointer flex justify-around" wire:click="completeSignup">Farei
                     isso depois</span>
             </x-filament-panels::form>
         </div>

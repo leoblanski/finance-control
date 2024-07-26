@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
-class SetBrandSettings
+class SetTeamSettings
 {
     /**
      * Handle an incoming request.
@@ -17,34 +17,34 @@ class SetBrandSettings
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $brand = $request->user()?->brand;
+        $team = $request->user()?->team;
 
-        if (!$brand) {
+        if (!$team) {
             return $next($request);
         }
 
-        if ($brand?->primary_color) {
+        if ($team?->primary_color) {
             FilamentColor::register([
-                'primary' => $brand?->primary_color,
+                'primary' => $team?->primary_color,
             ]);
         }
 
-        if ($brand?->secondary_color) {
+        if ($team?->secondary_color) {
             FilamentColor::register([
-                'secondary' => $brand?->secondary_color,
+                'secondary' => $team?->secondary_color,
             ]);
         }
 
         try {
-            $logoUrl = $brand?->logo ? Storage::url($brand?->logo) : null;
+            $logoUrl = $team?->logo ? Storage::url($team?->logo) : null;
         } catch (\InvalidArgumentException $e) {
             $logoUrl = null;
             report($e);
         }
 
-        $panel = filament()->getPanel('user')
-            ->brandName($brand?->name)
-            ->brandLogo($logoUrl);
+        $panel = filament()->getPanel('user');
+        // ->brandName($team?->name)
+        // ->teamLogo($logoUrl);
 
         return $next($request);
     }

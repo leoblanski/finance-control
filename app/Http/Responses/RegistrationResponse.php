@@ -10,6 +10,6 @@ class RegistrationResponse extends AuthRegistrationResponse
 {
     public function toResponse($request): RedirectResponse | Redirector
     {
-        return redirect()->intended($request->input('confirmUrl'));
+        return redirect('/');
     }
 }

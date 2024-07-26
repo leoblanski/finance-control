@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('team_id')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->foreignId('category_id');
             $table->foreignId('payment_type_id');

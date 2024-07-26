@@ -39,7 +39,7 @@ class ManageTransactions extends ManageRecords
                             ->groupBy('categories.name')
                             ->get();
 
-                        if (abs($totalMonthCategory[0]->aggregate) > abs($record->category->limit)) {
+                        if ($record->category->limit > 0 && abs($totalMonthCategory[0]->aggregate) > abs($record->category->limit)) {
                             Notification::make()
                                 ->title('Atenção!')
                                 ->body('Você atingiu o limite de gastos da categoria ' . $record->category->name)

@@ -29,13 +29,12 @@ class ConfirmSignup extends Page
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Nome da Loja')
-                    ->required()
-                    ->columnSpanFull(),
+                // Forms\Components\TextInput::make('name')
+                //     ->label('Nome da Empresa')
+                //     ->required()
+                //     ->columnSpanFull(),
                 Forms\Components\TextInput::make('phone')
                     ->label('Contato')
-                    ->required()
                     ->columnSpanFull()
                     ->placeholder('(99) 99999-9999')
                     ->mask('(99) 99999-9999'),
@@ -54,15 +53,15 @@ class ConfirmSignup extends Page
                         'md' => 1
                     ]),
 
-                Forms\Components\FileUpload::make('logo')
-                    ->label('Associe a logo da loja')
-                    ->columnSpanFull()
+                // Forms\Components\FileUpload::make('logo')
+                //     ->label('Associe a logo da loja')
+                //     ->columnSpanFull()
 
-                    // ->disk('s3')
-                    ->directory('brand-logos')
-                    ->imageEditor()
-                    ->imageEditorViewportWidth('1920')
-                    ->imageEditorViewportHeight('500'),
+                //     // ->disk('s3')
+                //     ->directory('brand-logos')
+                //     ->imageEditor()
+                //     ->imageEditorViewportWidth('1920')
+                //     ->imageEditorViewportHeight('500'),
                 // Forms\Components\FileUpload::make('avatar')
                 //     ->label('Upload a profile photo')
                 //     ->disk('s3')
@@ -106,8 +105,8 @@ class ConfirmSignup extends Page
             'email_verified_at' => now(),
         ]);
 
-        $user->brand->update([
-            'name' => $data['name'] != '' ? $data['name'] : 'Loja Virtual',
+        $user->team->update([
+            'name' => $data['name'] != '' ? $data['name'] : 'Controle ' . $user->username,
             'email' => $user->email,
             'logo' => $data['logo'] ?? null,
             'phone' => $data['phone'] ?? null,

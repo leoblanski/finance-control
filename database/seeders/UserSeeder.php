@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -16,10 +17,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $this->command->info('Creating admin user...');
+        $this->command->info('Creating user...');
+
+        Team::factory()->create([
+            'name' => 'Team',
+        ]);
 
         User::factory()->create([
-            'brand_id' => 1,
+            'team_id' => 1,
             'name' => 'User',
             'email' => 'team@team.com',
             'username' => 'user',

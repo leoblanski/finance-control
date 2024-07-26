@@ -6,7 +6,7 @@ use App\Filament\Auth\Login;
 use App\Filament\Auth\PasswordReset\RequestPasswordReset;
 use App\Filament\Auth\Register;
 use App\Filament\Pages\Dashboard;
-use App\Http\Middleware\SetBrandSettings;
+use App\Http\Middleware\SetTeamSettings;
 use App\Http\Middleware\ValidateUserStatus;
 use App\Listeners\Login\SetConfigsInSession;
 use Filament\Forms\Components\DateTimePicker;
@@ -42,9 +42,7 @@ class UserPanelProvider extends PanelProvider
             ->font('Nexa')
             ->registration(Register::class)
             ->registrationRouteSlug('signup')
-            ->passwordReset(
-                RequestPasswordReset::class
-            )
+            ->passwordReset(null)
             ->colors([
                 'primary' =>  Color::Amber
             ])
@@ -70,7 +68,7 @@ class UserPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                SetBrandSettings::class,
+                SetTeamSettings::class,
             ])
             ->authMiddleware([
                 Authenticate::class,

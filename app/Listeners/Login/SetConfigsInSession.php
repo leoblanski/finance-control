@@ -18,8 +18,8 @@ class SetConfigsInSession
      */
     public function handle(object $event): void
     {
-        // $team = $event->user->team;
+        $team = $event->user->team;
 
-        // Session::put('team_id', $event->user->team_id);
+        Session::put('team_id', $event->user->team_id);
     }
 }

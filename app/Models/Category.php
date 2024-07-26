@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToTeam;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -15,6 +16,7 @@ use Leandrocfe\FilamentPtbrFormFields\Money;
 class Category extends Model
 {
     use HasFactory;
+    use BelongsToTeam;
 
     /**
      * The attributes that are mass assignable.

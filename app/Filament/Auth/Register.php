@@ -13,11 +13,9 @@ use App\Models\EmailTemplate;
 use App\Models\Role;
 use App\Models\Team;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use App\Services\AuthQuoteService;
 use Filament\Facades\Filament;
 use App\Jobs\DispatchEmail;
-use App\Models\Brand;
 
 class Register extends BaseRegister
 {
@@ -34,7 +32,6 @@ class Register extends BaseRegister
                     ->label('Nome Completo')
                     ->columnSpan([
                         'default' => 2,
-                        'md' => 1
                     ])
                     ->required(),
                 Forms\Components\TextInput::make('username')
@@ -88,18 +85,17 @@ class Register extends BaseRegister
             $data['username'] = $data['email'];
         }
 
-        $brand = Brand::create([
-            'name' => 'Loja Virtual',
+        $team = Team::create([
+            'name' => 'Controle' . $data['username'],
             'email' => $data['email'],
             'active' => true
         ]);
 
         $data['remember_token'] = $this->rememberToken;
         $data['active'] = true;
-        $data['brand_id'] = $brand->id;
+        $data['team_id'] = $team->id;
 
-        $user = $this->getUserModel()::create($data)
-            ->assignRole(Role::findByName(Role::MANAGER_ROLE));
+        $user = $this->getUserModel()::create($data);
 
         return $user;
     }
