@@ -111,11 +111,11 @@ class Register extends BaseRegister
             'token' => $this->rememberToken
         ]);
 
-        $isEmailSent = $this->sendEmail($user->email, $this->getEmailMessage($confirmUrl));
+        // $isEmailSent = $this->sendEmail($user->email, $this->getEmailMessage($confirmUrl));
 
-        if (!$isEmailSent) {
-            return null;
-        }
+        // if (!$isEmailSent) {
+        //     return null;
+        // }
 
         Filament::auth()->login($user);
         session()->regenerate();

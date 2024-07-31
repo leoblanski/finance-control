@@ -20,14 +20,21 @@ class UserSeeder extends Seeder
         $this->command->info('Creating user...');
 
         Team::factory()->create([
-            'name' => 'Team',
+            'name' => 'Team Blanski',
         ]);
 
         User::factory()->create([
             'team_id' => 1,
-            'name' => 'User',
-            'email' => 'team@team.com',
-            'username' => 'user',
+            'name' => 'Camila',
+            'email' => 'fga.camilaaquino@gmail.com',
+            'username' => 'camiladeaquino',
+            'password' => Hash::make('123123'),
+        ]);
+         User::factory()->create([
+            'team_id' => 1,
+            'name' => 'Leonardo',
+            'email' => 'leo_blanski@hotmail.com',
+            'username' => 'leoblanski',
             'password' => Hash::make('123123'),
         ]);
     }
