@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Traits\BelongsToTeam;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
@@ -82,10 +84,12 @@ class User extends Authenticatable implements FilamentUser, HasName
             TextInput::make('name')
                 ->maxLength(255),
             TextInput::make('email')
+                ->unique()
                 ->email()
                 ->required()
                 ->maxLength(255),
             TextInput::make('username')
+                ->required()
                 ->maxLength(255),
             TextInput::make('password')
                 ->password()

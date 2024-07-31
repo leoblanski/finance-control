@@ -37,7 +37,11 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->slideOver(),
+                Tables\Actions\EditAction::make()->slideOver()->mutateFormDataUsing(function (array $data): array {
+                    $data['password'] = bcrypt($data['password']);
+
+                    return $data;
+                }),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

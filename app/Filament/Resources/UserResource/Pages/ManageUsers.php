@@ -13,7 +13,11 @@ class ManageUsers extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->slideOver(),
+            Actions\CreateAction::make()->slideOver()->mutateFormDataUsing(function (array $data): array {
+                $data['password'] = bcrypt($data['password']);
+
+                return $data;
+            })
         ];
     }
 }
