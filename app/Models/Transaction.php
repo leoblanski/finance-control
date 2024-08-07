@@ -133,6 +133,7 @@ class Transaction extends Model
                 ->summarize(Sum::make('value')->label('Balance')),
             TextColumn::make('date')
                 ->date('d/m/Y')
+                ->sortable()
                 ->searchable()
                 ->label('Date')
         ];
