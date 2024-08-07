@@ -22,7 +22,6 @@ class Transaction extends Model
 {
     use HasFactory;
     use BelongsToTeam;
-    use BelongsToUser;
 
     /**
      * The attributes that are mass assignable.
