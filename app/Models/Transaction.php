@@ -86,6 +86,9 @@ class Transaction extends Model
             Select::make('payment_type_id')
                 ->relationship('paymentType', 'name')
                 ->required(),
+            DatePicker::make('date')
+                ->default(now())
+                ->required(),
             Textarea::make('description')
                 ->columnSpanFull(),
             Money::make('value')
@@ -96,9 +99,6 @@ class Transaction extends Model
                     'out' => 'Out'
                 ])
                 ->default('out'),
-            DatePicker::make('date')
-                ->default(now())
-                ->required()
         ];
     }
 

@@ -36,15 +36,14 @@ class TransactionResource extends Resource
             ->filters([
                 SelectFilter::make('type')
                     ->options([
-                        'in' => 'Entrada',
-                        'out' => 'Saída',
+                        'in' => __('labels.in'),
+                        'out' => __('labels.out'),
                     ]),
                 SelectFilter::make('payment_type_id')
-                    ->options(fn () => PaymentType::pluck('name', 'id')->toArray()),
+                    ->options(fn() => PaymentType::pluck('name', 'id')->toArray()),
                 SelectFilter::make('category_id')
                     ->multiple()
-                    ->options(fn () => Category::pluck('name', 'id')->toArray()),
-
+                    ->options(fn() => Category::pluck('name', 'id')->toArray()),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->slideOver()
