@@ -121,6 +121,7 @@ class Transaction extends Model
             BadgeColumn::make('value')
                 ->searchable()
                 ->label('Value')
+                ->sortable()
                 ->icon(function (Transaction $transaction) {
                     return $transaction->type == 'out' ? 'heroicon-o-arrow-down' : 'heroicon-o-arrow-up';
                 })
