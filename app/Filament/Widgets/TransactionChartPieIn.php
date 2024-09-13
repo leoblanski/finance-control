@@ -52,6 +52,7 @@ class TransactionChartPieIn extends ChartWidget
                 $activeFilter['startDate'] ?? now()->subMonth(),
                 $activeFilter['endDate'] ?? now(),
             ])
+            ->when($category, fn($query) => $query->where('category_id', $category))
             ->groupBy('categories.name')
             ->get();
 
