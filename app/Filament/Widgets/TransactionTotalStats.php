@@ -16,10 +16,12 @@ class TransactionTotalStats extends BaseWidget
     {
         $startDate = $this->filters['startDate'] ?? null;
         $endDate = $this->filters['endDate'] ?? null;
+        $category = $this->filters['category_id'] ?? null;
 
         $query = Transaction::query()
-            ->when($startDate, fn (Builder $query) => $query->whereDate('created_at', '>=', $startDate))
-            ->when($endDate, fn (Builder $query) => $query->whereDate('created_at', '<=', $endDate));
+            ->when($startDate, fn(Builder $query) => $query->whereDate('created_at', '>=', $startDate))
+            ->when($endDate, fn(Builder $query) => $query->whereDate('created_at', '<=', $endDate))
+            ->when($category, fn(Builder $query) => $query->where('category_id', $category));
 
         $daysIn = clone $query;
         $daysIn = $daysIn->selectRaw('count(*) as value, date(created_at) as date')
@@ -41,7 +43,7 @@ class TransactionTotalStats extends BaseWidget
 
         return [
             Stat::make(
-                label: 'Total entradas',
+                label: __('labels.total_entries'),
                 value: function () use ($totals) {
                     return 'R$ ' . number_format($totals->total_in, 2, ',', '.');
                 }
@@ -50,7 +52,7 @@ class TransactionTotalStats extends BaseWidget
                 ->color('success')
                 ->chartColor('success'),
             Stat::make(
-                label: 'Total saídas',
+                label: __('labels.total_exits'),
                 value: function () use ($totals) {
                     return 'R$ ' . number_format($totals->total_out, 2, ',', '.');
                 }
@@ -58,7 +60,7 @@ class TransactionTotalStats extends BaseWidget
                 ->chart($daysOut->pluck('value')->toArray())
                 ->color('danger'),
             Stat::make(
-                label: 'Saldo',
+                label: __('labels.total'),
                 value: function () use ($totals) {
                     return 'R$ ' . number_format($totals->total, 2, ',', '.');
                 }

@@ -4,23 +4,21 @@ namespace App\Filament\Widgets;
 
 use App\Models\Transaction;
 use Filament\Widgets\ChartWidget;
+use Illuminate\Contracts\Support\Htmlable;
 
 class TransactionChartPieIn extends ChartWidget
 {
-    protected static ?string $heading = 'Receitas por Categoria';
-
-    protected function getFilters(): ?array
+    public function getHeading(): string | Htmlable | null
     {
-        return [
-            'today' => 'Today',
-            'week' => 'Last week',
-            'month' => 'Last month',
-            'year' => 'This year',
-        ];
+        return __('labels.income_by_category');
     }
 
     protected function getData(): array
     {
+        $startDate = $this->filters['startDate'] ?? null;
+        $endDate = $this->filters['endDate'] ?? null;
+        $category = $this->filters['category_id'] ?? null;
+
         $activeFilter = $this->filter;
 
         match ($activeFilter) {
@@ -40,7 +38,10 @@ class TransactionChartPieIn extends ChartWidget
                 'startDate' => now()->startOfYear(),
                 'endDate' => now()->endOfYear(),
             ],
-            default => $activeFilter = [],
+            default => $activeFilter = [
+                'startDate' => $startDate ?? now()->subMonth(),
+                'endDate' => $endDate ?? now(),
+            ],
         };
 
         $transaction = Transaction::query()
@@ -57,24 +58,27 @@ class TransactionChartPieIn extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Blog posts',
+                    'label' => 'Income',
                     'data' => $transaction->map(function ($transaction) {
                         return $transaction->aggregate;
                     }),
                     'backgroundColor' => [
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FFCE56',
                         '#4BC0C0',
-                        '#9966FF',
+                        '#FF6384',
+                        '#FFCE56',
                         '#FF9F40',
                         '#FFCD56',
-                        '#4BC0C0',
+                        '#FF6384',
                         '#36A2EB',
+                        '#4BC0C0',
                         '#9966FF',
                         '#FF9F40',
                         '#FFCE56',
                         '#FF6384',
+                        '#36A2EB',
+                        '#4BC0C0',
+
+
                     ],
                 ],
             ],

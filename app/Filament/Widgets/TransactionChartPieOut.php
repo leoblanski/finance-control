@@ -4,44 +4,23 @@ namespace App\Filament\Widgets;
 
 use App\Models\Transaction;
 use Filament\Widgets\ChartWidget;
+use Filament\Widgets\Concerns\InteractsWithPageFilters;
+use Illuminate\Contracts\Support\Htmlable;
 
 class TransactionChartPieOut extends ChartWidget
 {
-    protected static ?string $heading = 'Gastos por Categoria';
+    use InteractsWithPageFilters;
 
-    protected function getFilters(): ?array
+    public function getHeading(): string | Htmlable | null
     {
-        return [
-            'today' => 'Today',
-            'week' => 'Last week',
-            'month' => 'Last month',
-            'year' => 'This year',
-        ];
+        return __('labels.expenses_by_category');
     }
 
     protected function getData(): array
     {
-        $activeFilter = $this->filter;
-
-        match ($activeFilter) {
-            'today' => $activeFilter = [
-                'startDate' => now()->startOfDay(),
-                'endDate' => now()->endOfDay(),
-            ],
-            'week' => $activeFilter = [
-                'startDate' => now()->startOfWeek(),
-                'endDate' => now()->endOfWeek(),
-            ],
-            'month' => $activeFilter = [
-                'startDate' => now()->startOfMonth(),
-                'endDate' => now()->endOfMonth(),
-            ],
-            'year' => $activeFilter = [
-                'startDate' => now()->startOfYear(),
-                'endDate' => now()->endOfYear(),
-            ],
-            default => $activeFilter = [],
-        };
+        $startDate = $this->filters['startDate'] ?? null;
+        $endDate = $this->filters['endDate'] ?? null;
+        $category = $this->filters['category_id'] ?? null;
 
         $transaction = Transaction::query()
             ->selectRaw('categories.name as category, sum(transactions.value) as aggregate')
@@ -51,13 +30,14 @@ class TransactionChartPieOut extends ChartWidget
                 $activeFilter['startDate'] ?? now()->subMonth(),
                 $activeFilter['endDate'] ?? now(),
             ])
+            ->when($category, fn($query) => $query->where('transactions.category_id', $category))
             ->groupBy('categories.name')
             ->get();
 
         return [
             'datasets' => [
                 [
-                    'label' => 'Blog posts',
+                    'label' => 'Expenses',
                     'data' => $transaction->map(function ($transaction) {
                         return $transaction->aggregate;
                     }),

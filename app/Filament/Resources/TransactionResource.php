@@ -6,10 +6,13 @@ use App\Filament\Resources\TransactionResource\Pages;
 use App\Models\Category;
 use App\Models\PaymentType;
 use App\Models\Transaction;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
+use Filament\Navigation\NavigationGroup;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
@@ -17,11 +20,32 @@ class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
 
-    protected static ?string $navigationGroup = 'Finance';
+    // protected static ?string $navigationGroup = __('labels.finances');
 
     protected static ?string $navigationIcon = 'heroicon-o-arrow-right-end-on-rectangle';
 
     protected static ?int $navigationSort = 2;
+
+
+    public static function getNavigationLabel(): string
+    {
+        return __('labels.transactions');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('labels.transactions');
+    }
+
+    public static function getModelLabelPlural(): string
+    {
+        return __('labels.transactions');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('labels.finances');
+    }
 
     public static function form(Form $form): Form
     {
@@ -34,6 +58,18 @@ class TransactionResource extends Resource
         return $table
             ->columns(Transaction::getColumns())
             ->filters([
+                // Filter::make('created_at')
+                //     ->form([
+                //         DatePicker::make('start')
+                //             ->label(__('labels.start'))
+                //             ->placeholder(__('labels.start')),
+                //         DatePicker::make('final')
+                //             ->label(__('labels.final'))
+                //             ->placeholder(__('labels.final')),
+                //     ])
+                //     ->query(function ($query, array $value) {
+                //         $query->whereBetween('created_at', $value);
+                //     }),
                 SelectFilter::make('type')
                     ->options([
                         'in' => __('labels.in'),
