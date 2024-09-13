@@ -73,27 +73,33 @@ class Transaction extends Model
     {
         return [
             Select::make('user_id')
-                ->label('Owner')
+                ->label(__('labels.owner'))
                 ->hint('O responsável pela transação')
                 ->relationship('user', 'name')
                 ->nullable(),
             Select::make('category_id')
+                ->label(__('labels.category'))
                 ->relationship('category', 'name')
                 ->required(),
             Select::make('payment_type_id')
+                ->label(__('labels.payment_type'))
                 ->relationship('paymentType', 'name')
                 ->required(),
             DatePicker::make('date')
+                ->label(__('labels.date'))
                 ->default(now())
                 ->required(),
             Textarea::make('description')
+                ->label(__('labels.description'))
                 ->columnSpanFull(),
             Money::make('value')
+                ->label(__('labels.value'))
                 ->required(),
             Radio::make('type')
+                ->label(__('labels.type'))
                 ->options([
-                    'in' => 'In',
-                    'out' => 'Out'
+                    'in' => __('labels.in'),
+                    'out' => __('labels.out'),
                 ])
                 ->default('out'),
         ];
@@ -104,20 +110,20 @@ class Transaction extends Model
         return [
             TextColumn::make('user.name')
                 ->searchable()
-                ->default('Sem responsável')
-                ->label('Owner'),
+                ->default(__('labels.not_informed'))
+                ->label(__('labels.owner')),
             TextColumn::make('category.name')
                 ->searchable()
-                ->label('Category'),
+                ->label(__('labels.category')),
             TextColumn::make('paymentType.name')
                 ->searchable()
-                ->label('Payment Type'),
+                ->label(__('labels.payment_type')),
             TextColumn::make('description')
                 ->searchable()
-                ->label('Description'),
+                ->label(__('labels.description')),
             BadgeColumn::make('value')
                 ->searchable()
-                ->label('Value')
+                ->label(__('labels.total'))
                 ->sortable()
                 ->icon(function (Transaction $transaction) {
                     return $transaction->type == 'out' ? 'heroicon-o-arrow-down' : 'heroicon-o-arrow-up';
@@ -133,7 +139,7 @@ class Transaction extends Model
                 ->date('d/m/Y')
                 ->sortable()
                 ->searchable()
-                ->label('Date')
+                ->label(__('labels.date')),
         ];
     }
 }

@@ -19,9 +19,27 @@ class CategoryResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
-    protected static ?string $navigationGroup = 'Settings';
-
     protected static ?string $navigationIcon = 'heroicon-o-tag';
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('labels.settings');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('labels.categories');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('labels.category');
+    }
+
+    public static function getModelLabelPlural(): string
+    {
+        return __('labels.categories');
+    }
 
     public static function form(Form $form): Form
     {

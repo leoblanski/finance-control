@@ -59,4 +59,13 @@ return [
     'total_entries' => 'Total de Entradas',
     'total_exits' => 'Total de Saídas',
     'total' => 'Saldo',
+    'incomes' => 'Entradas',
+    'expenses' => 'Saídas',
+    'users' => 'Usuários',
+    'user' => 'Usuário',
+    'categories' => 'Categorias',
+    'category' => 'Categoria',
+    'settings' => 'Configurações',
+    'not_informed' => 'Não Informado',
+    'amount' => 'Valor',
 ];

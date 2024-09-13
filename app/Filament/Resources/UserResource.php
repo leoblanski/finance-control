@@ -19,9 +19,27 @@ class UserResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
-    protected static ?string $navigationGroup = 'Settings';
-
     protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('labels.settings');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('labels.users');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('labels.user');
+    }
+
+    public static function getModelLabelPlural(): string
+    {
+        return __('labels.users');
+    }
 
     public static function form(Form $form): Form
     {

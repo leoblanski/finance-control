@@ -7,9 +7,7 @@ use App\Models\Category;
 use App\Models\PaymentType;
 use App\Models\Transaction;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
-use Filament\Navigation\NavigationGroup;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
@@ -20,7 +18,6 @@ class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
 
-    // protected static ?string $navigationGroup = __('labels.finances');
 
     protected static ?string $navigationIcon = 'heroicon-o-arrow-right-end-on-rectangle';
 
@@ -71,13 +68,16 @@ class TransactionResource extends Resource
                 //         $query->whereBetween('created_at', $value);
                 //     }),
                 SelectFilter::make('type')
+                    ->label(__('labels.type'))
                     ->options([
                         'in' => __('labels.in'),
                         'out' => __('labels.out'),
                     ]),
                 SelectFilter::make('payment_type_id')
+                    ->label(__('labels.payment_type'))
                     ->options(fn() => PaymentType::pluck('name', 'id')->toArray()),
                 SelectFilter::make('category_id')
+                    ->label(__('labels.category'))
                     ->multiple()
                     ->options(fn() => Category::pluck('name', 'id')->toArray()),
             ])

@@ -59,4 +59,12 @@ return [
     'total_entries' => 'Total Entries',
     'total_exits' => 'Total Exits',
     'total' => 'Total',
+    'user' => 'User',
+    'users' => 'Users',
+    'categories' => 'Categories',
+    'category' => 'Category',
+    'settings' => 'Settings',
+    'not_informed' => 'Not Informed',
+    'monthly_limit' => 'Monthly Limit',
+    'amount' => 'Amount',
 ];

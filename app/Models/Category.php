@@ -44,15 +44,15 @@ class Category extends Model
     {
         return [
             TextInput::make('name')
-                ->label('Name')
+                ->label(__('labels.name'))
                 ->required(),
             TextInput::make('description')
-                ->label('Description'),
+                ->label(__('labels.description')),
             Money::make('limit')
-                ->label('Mensal Limit')
+                ->label(__('labels.montly_limit'))
                 ->columnSpanFull(),
             Toggle::make('active')
-                ->label('Active')
+                ->label(__('labels.active'))
                 ->default(true)
                 ->required(),
         ];
@@ -62,17 +62,20 @@ class Category extends Model
     {
         return [
             TextColumn::make('name')
+                ->label(__('labels.name'))
                 ->sortable()
                 ->searchable(),
             TextColumn::make('description')
+                ->label(__('labels.description'))
                 ->sortable()
                 ->searchable(),
             TextColumn::make('limit')
-                ->label('Limite Mensal')
-                ->formatStateUsing(fn (Category $category) => $category->limit ? 'R$ ' . number_format($category->limit, 2, ',', '.') : 'Sem limite')
+                ->label(__('labels.montly_limit'))
+                ->formatStateUsing(fn(Category $category) => $category->limit ? 'R$ ' . number_format($category->limit, 2, ',', '.') : 'Sem limite')
                 ->sortable()
                 ->searchable(),
             ToggleColumn::make('active')
+                ->label(__('labels.active'))
                 ->sortable()
                 ->searchable(),
         ];
