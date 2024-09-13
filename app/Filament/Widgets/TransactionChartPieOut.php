@@ -25,7 +25,7 @@ class TransactionChartPieOut extends ChartWidget
         $transaction = Transaction::query()
             ->selectRaw('categories.name as category, sum(transactions.value) as aggregate')
             ->join('categories', 'transactions.category_id', '=', 'categories.id')
-            ->where('transactions.type', 'out')
+            ->where('transactions.value', '<', 0)
             ->whereBetween('transactions.created_at', [
                 $activeFilter['startDate'] ?? now()->subMonth(),
                 $activeFilter['endDate'] ?? now(),

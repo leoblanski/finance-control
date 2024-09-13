@@ -4,10 +4,13 @@ namespace App\Filament\Widgets;
 
 use App\Models\Transaction;
 use Filament\Widgets\ChartWidget;
+use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Illuminate\Contracts\Support\Htmlable;
 
 class TransactionChartPieIn extends ChartWidget
 {
+    use InteractsWithPageFilters;
+
     public function getHeading(): string | Htmlable | null
     {
         return __('labels.income_by_category');
@@ -19,38 +22,13 @@ class TransactionChartPieIn extends ChartWidget
         $endDate = $this->filters['endDate'] ?? null;
         $category = $this->filters['category_id'] ?? null;
 
-        $activeFilter = $this->filter;
-
-        match ($activeFilter) {
-            'today' => $activeFilter = [
-                'startDate' => now()->startOfDay(),
-                'endDate' => now()->endOfDay(),
-            ],
-            'week' => $activeFilter = [
-                'startDate' => now()->startOfWeek(),
-                'endDate' => now()->endOfWeek(),
-            ],
-            'month' => $activeFilter = [
-                'startDate' => now()->startOfMonth(),
-                'endDate' => now()->endOfMonth(),
-            ],
-            'year' => $activeFilter = [
-                'startDate' => now()->startOfYear(),
-                'endDate' => now()->endOfYear(),
-            ],
-            default => $activeFilter = [
-                'startDate' => $startDate ?? now()->subMonth(),
-                'endDate' => $endDate ?? now(),
-            ],
-        };
-
         $transaction = Transaction::query()
             ->selectRaw('categories.name as category, sum(transactions.value) as aggregate')
             ->join('categories', 'transactions.category_id', '=', 'categories.id')
-            ->where('transactions.type', 'in')
+            ->where('transactions.value', '>', 0)
             ->whereBetween('transactions.created_at', [
-                $activeFilter['startDate'] ?? now()->subMonth(),
-                $activeFilter['endDate'] ?? now(),
+                $startDate ?? now()->subMonth(),
+                $endDate ?? now(),
             ])
             ->when($category, fn($query) => $query->where('category_id', $category))
             ->groupBy('categories.name')
