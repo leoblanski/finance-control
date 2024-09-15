@@ -53,13 +53,19 @@ class PaymentTypeResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->slideOver(),
-                Tables\Actions\DeleteAction::make(),
+                    ->slideOver()
+                    ->disabled(function ($record) {
+                        return !$record->team_id;
+                    }),
+                Tables\Actions\DeleteAction::make()
+                    ->disabled(function ($record) {
+                        return !$record->team_id;
+                    }),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 
