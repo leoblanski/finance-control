@@ -16,12 +16,12 @@ class TransactionTotalStats extends BaseWidget
     {
         $startDate = $this->filters['startDate'] ?? now()->subMonth();
         $endDate = $this->filters['endDate'] ?? now();
-        $category = $this->filters['category_id'] ?? null;
+        $categoryIds = $this->filters['category_ids'] ?? null;
 
         $query = Transaction::query()
             ->when($startDate, fn(Builder $query) => $query->whereDate('created_at', '>=', $startDate))
             ->when($endDate, fn(Builder $query) => $query->whereDate('created_at', '<=', $endDate))
-            ->when($category, fn(Builder $query) => $query->where('category_id', $category));
+            ->when($categoryIds, fn(Builder $query) => $query->whereIn('category_id', $categoryIds));
 
         $daysIn = clone $query;
         $daysIn = $daysIn->selectRaw('count(*) as value, date(created_at) as date')

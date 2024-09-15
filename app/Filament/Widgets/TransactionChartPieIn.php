@@ -20,7 +20,7 @@ class TransactionChartPieIn extends ChartWidget
     {
         $startDate = $this->filters['startDate'] ?? now()->subMonth();
         $endDate = $this->filters['endDate'] ?? now();
-        $category = $this->filters['category_id'] ?? null;
+        $categoryIds = $this->filters['category_id'] ?? null;
 
         $transaction = Transaction::query()
             ->selectRaw('categories.name as category, sum(transactions.value) as aggregate')
@@ -30,7 +30,7 @@ class TransactionChartPieIn extends ChartWidget
                 $startDate,
                 $endDate,
             ])
-            ->when($category, fn($query) => $query->where('category_id', $category))
+            ->when($categoryIds, fn($query) => $query->whereIn('category_id', $categoryIds))
             ->groupBy('categories.name')
             ->get();
 

@@ -11,6 +11,7 @@ use App\Models\Transaction;
 use Filament\Actions\CreateAction;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -40,8 +41,9 @@ class Dashboard extends BaseDashboard
                         DatePicker::make('endDate')
                             ->label(__('labels.end_date'))
                             ->default(now()),
-                        Select::make('category_id')
+                        Select::make('category_ids')
                             ->label(__('labels.category'))
+                            ->multiple()
                             ->options(fn() => Category::pluck('name', 'id')->toArray())
                     ])
                     ->columns(3),
