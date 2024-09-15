@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Actions\CreateTransaction;
 use App\Filament\Widgets\TransactionChartPieIn;
 use App\Filament\Widgets\TransactionChartPieOut;
 use App\Filament\Widgets\TransactionTotalStats;
@@ -23,7 +24,7 @@ class Dashboard extends BaseDashboard
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()->modal()->model(Transaction::class)->form(Transaction::getForm())->slideOver()
+            CreateTransaction::get(),
         ];
     }
 

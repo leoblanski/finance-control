@@ -79,4 +79,9 @@ return [
     'payment_types' => 'Payment Types',
     'payment_type' => 'Payment Type',
     'parameters' => 'Parameters',
+    'team' => 'Team',
+    'teams' => 'Teams',
+    'primary_color' => 'Primary Color',
+    'secondary_color' => 'Secondary Color',
+    'create_transaction' => 'Create Transaction',
 ];
