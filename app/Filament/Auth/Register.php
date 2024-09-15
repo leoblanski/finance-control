@@ -86,7 +86,7 @@ class Register extends BaseRegister
         }
 
         $team = Team::create([
-            'name' => 'Controle' . $data['username'],
+            'name' => 'Controle ' . $data['name'],
             'email' => $data['email'],
             'active' => true
         ]);
@@ -104,7 +104,7 @@ class Register extends BaseRegister
     {
         $this->rememberToken = $this->generateToken();
 
-        $user = $this->wrapInDatabaseTransaction(fn () => $this->createUser());
+        $user = $this->wrapInDatabaseTransaction(fn() => $this->createUser());
 
         $confirmUrl = route('auth.confirm-signup', [
             'email' => $user->email,

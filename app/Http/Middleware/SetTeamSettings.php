@@ -42,8 +42,8 @@ class SetTeamSettings
             report($e);
         }
 
-        $panel = filament()->getPanel('user');
-        // ->brandName($team?->name)
+        $panel = filament()->getPanel('user')
+            ->brandName($team?->name);
         // ->teamLogo($logoUrl);
 
         return $next($request);
