@@ -76,4 +76,7 @@ return [
     'password' => 'Password',
     'created_at' => 'Created At',
     'updated_at' => 'Updated At',
+    'payment_types' => 'Payment Types',
+    'payment_type' => 'Payment Type',
+    'parameters' => 'Parameters',
 ];

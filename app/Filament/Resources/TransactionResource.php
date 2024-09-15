@@ -21,8 +21,7 @@ class TransactionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-arrow-right-end-on-rectangle';
 
-    protected static ?int $navigationSort = 2;
-
+    protected static ?int $navigationSort = 1;
 
     public static function getNavigationLabel(): string
     {

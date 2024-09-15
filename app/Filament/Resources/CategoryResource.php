@@ -23,7 +23,7 @@ class CategoryResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('labels.settings');
+        return __('labels.parameters');
     }
 
     public static function getNavigationLabel(): string

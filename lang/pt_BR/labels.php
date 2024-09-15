@@ -78,4 +78,7 @@ return [
     'password' => 'Senha',
     'created_at' => 'Data de Criação',
     'updated_at' => 'Data de Atualização',
+    'payment_types' => 'Tipos de Pagamento',
+    'payment_type' => 'Tipo de Pagamento',
+    'parameters' => 'Parâmetros',
 ];
