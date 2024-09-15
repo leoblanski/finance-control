@@ -3,6 +3,7 @@
 return [
     'start' => 'Start',
     'final' => 'End',
+    'name' => 'Name',
     'start_date' => 'Start Date',
     'end_date' => 'End Date',
     'in' => 'In',
@@ -67,4 +68,12 @@ return [
     'not_informed' => 'Not Informed',
     'monthly_limit' => 'Monthly Limit',
     'amount' => 'Amount',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
+    'monthly_limit_config' => 'When informed, alerts will be sent when the total value of exits exceeds the monthly limit.',
+    'username' => 'Username',
+    'last_login' => 'Last Login',
+    'password' => 'Password',
+    'created_at' => 'Created At',
+    'updated_at' => 'Updated At',
 ];

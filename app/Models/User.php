@@ -82,6 +82,8 @@ class User extends Authenticatable implements FilamentUser, HasName
     {
         return [
             TextInput::make('name')
+                ->label(__('labels.name'))
+                ->required()
                 ->maxLength(255),
             TextInput::make('email')
                 ->unique()
@@ -89,13 +91,17 @@ class User extends Authenticatable implements FilamentUser, HasName
                 ->required()
                 ->maxLength(255),
             TextInput::make('username')
+                ->unique()
+                ->label(__('labels.username'))
                 ->required()
                 ->maxLength(255),
             TextInput::make('password')
+                ->label(__('labels.password'))
                 ->password()
                 ->required()
                 ->maxLength(255),
             Toggle::make('active')
+                ->label(__('labels.active'))
                 ->default(true)
                 ->required(),
         ];
@@ -105,21 +111,27 @@ class User extends Authenticatable implements FilamentUser, HasName
     {
         return [
             TextColumn::make('name')
+                ->label(__('labels.name'))
                 ->searchable(),
             TextColumn::make('email')
                 ->searchable(),
             TextColumn::make('username')
+                ->label(__('labels.username'))
                 ->searchable(),
             IconColumn::make('active')
+                ->label(__('labels.active'))
                 ->boolean(),
             TextColumn::make('last_login_at')
+                ->label(__('labels.last_login'))
                 ->dateTime()
                 ->sortable(),
             TextColumn::make('created_at')
+                ->label(__('labels.created_at'))
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('updated_at')
+                ->label(__('labels.updated_at'))
                 ->dateTime()
                 ->sortable()
                 ->toggleable(isToggledHiddenByDefault: true),

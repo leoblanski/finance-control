@@ -3,6 +3,7 @@
 return [
     'start' => 'Começo',
     'final' => 'Final',
+    'name' => 'Nome',
     'start_date' => 'Data de Início',
     'end_date' => 'Data Final',
     'in' => 'Entrada',
@@ -68,4 +69,13 @@ return [
     'settings' => 'Configurações',
     'not_informed' => 'Não Informado',
     'amount' => 'Valor',
+    'monthly_limit' => 'Limite Mensal',
+    'active' => 'Ativo',
+    'inactive' => 'Inativo',
+    'monthly_limit_config' => 'Quando informado, será enviado alertas quando o valor total de saídas ultrapassar o limite mensal.',
+    'username' => 'Usuário',
+    'last_login' => 'Último Login',
+    'password' => 'Senha',
+    'created_at' => 'Data de Criação',
+    'updated_at' => 'Data de Atualização',
 ];

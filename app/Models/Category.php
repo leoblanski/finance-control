@@ -49,7 +49,7 @@ class Category extends Model
             TextInput::make('description')
                 ->label(__('labels.description')),
             Money::make('limit')
-                ->label(__('labels.montly_limit'))
+                ->label(__('labels.monthly_limit'))
                 ->columnSpanFull(),
             Toggle::make('active')
                 ->label(__('labels.active'))
@@ -70,7 +70,7 @@ class Category extends Model
                 ->sortable()
                 ->searchable(),
             TextColumn::make('limit')
-                ->label(__('labels.montly_limit'))
+                ->label(__('labels.monthly_limit'))
                 ->formatStateUsing(fn(Category $category) => $category->limit ? 'R$ ' . number_format($category->limit, 2, ',', '.') : 'Sem limite')
                 ->sortable()
                 ->searchable(),

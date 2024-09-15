@@ -14,8 +14,8 @@ class TransactionTotalStats extends BaseWidget
 
     public function getStats(): array
     {
-        $startDate = $this->filters['startDate'] ?? null;
-        $endDate = $this->filters['endDate'] ?? null;
+        $startDate = $this->filters['startDate'] ?? now()->subMonth();
+        $endDate = $this->filters['endDate'] ?? now();
         $category = $this->filters['category_id'] ?? null;
 
         $query = Transaction::query()

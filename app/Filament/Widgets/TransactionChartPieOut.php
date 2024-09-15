@@ -18,8 +18,8 @@ class TransactionChartPieOut extends ChartWidget
 
     protected function getData(): array
     {
-        $startDate = $this->filters['startDate'] ?? null;
-        $endDate = $this->filters['endDate'] ?? null;
+        $startDate = $this->filters['startDate'] ?? now()->subMonth();
+        $endDate = $this->filters['endDate'] ?? now();
         $category = $this->filters['category_id'] ?? null;
 
         $transaction = Transaction::query()
@@ -27,8 +27,8 @@ class TransactionChartPieOut extends ChartWidget
             ->join('categories', 'transactions.category_id', '=', 'categories.id')
             ->where('transactions.value', '<', 0)
             ->whereBetween('transactions.created_at', [
-                $activeFilter['startDate'] ?? now()->subMonth(),
-                $activeFilter['endDate'] ?? now(),
+                $startDate,
+                $endDate,
             ])
             ->when($category, fn($query) => $query->where('transactions.category_id', $category))
             ->groupBy('categories.name')
