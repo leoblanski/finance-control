@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\BelongsToTeam;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -76,15 +77,24 @@ class Transaction extends Model
                 ->label(__('labels.owner'))
                 ->hint('O responsável pela transação')
                 ->relationship('user', 'name')
+                ->columnSpanFull()
                 ->nullable(),
-            Select::make('category_id')
-                ->label(__('labels.category'))
-                ->relationship('category', 'name')
-                ->required(),
-            Select::make('payment_type_id')
-                ->label(__('labels.payment_type'))
-                ->relationship('paymentType', 'name')
-                ->required(),
+            Grid::make([
+                'default' => '1',
+                'sm' => '1',
+                'md' => '2',
+            ])->schema([
+                Select::make('category_id')
+                    ->searchable()
+                    ->label(__('labels.category'))
+                    ->relationship('category', 'name')
+                    ->required(),
+                Select::make('payment_type_id')
+                    ->searchable()
+                    ->label(__('labels.payment_type'))
+                    ->relationship('paymentType', 'name')
+                    ->required(),
+            ]),
             DatePicker::make('date')
                 ->label(__('labels.date'))
                 ->default(now())
@@ -134,7 +144,7 @@ class Transaction extends Model
                 ->formatStateUsing(function (Transaction $transaction) {
                     return 'R$ ' . number_format($transaction->value, 2, ',', '.');
                 })
-                ->summarize(Sum::make('value')->label('Balance')),
+                ->summarize(Sum::make('value')->label(__('labels.total'))),
             TextColumn::make('date')
                 ->date('d/m/Y')
                 ->sortable()

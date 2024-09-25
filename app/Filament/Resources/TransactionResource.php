@@ -76,6 +76,7 @@ class TransactionResource extends Resource
                     ->label(__('labels.payment_type'))
                     ->options(fn() => PaymentType::pluck('name', 'id')->toArray()),
                 SelectFilter::make('category_id')
+                    ->searchable()
                     ->label(__('labels.category'))
                     ->multiple()
                     ->options(fn() => Category::pluck('name', 'id')->toArray()),

@@ -59,7 +59,7 @@ return [
     'expenses_by_category' => 'Despesas por Categoria',
     'total_entries' => 'Total de Entradas',
     'total_exits' => 'Total de Saídas',
-    'total' => 'Saldo',
+    'total' => 'Total',
     'incomes' => 'Entradas',
     'expenses' => 'Saídas',
     'users' => 'Usuários',
