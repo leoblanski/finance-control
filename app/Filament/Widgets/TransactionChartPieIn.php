@@ -25,7 +25,7 @@ class TransactionChartPieIn extends ChartWidget
         $transaction = Transaction::query()
             ->selectRaw('categories.name as category, sum(transactions.value) as aggregate')
             ->join('categories', 'transactions.category_id', '=', 'categories.id')
-            ->join('users', 'transactions.user_id', '=', 'users.id')
+            ->leftJoin('users', 'transactions.user_id', '=', 'users.id')
             ->where('transactions.value', '>', 0)
             ->whereBetween('transactions.date', [
                 $startDate,
