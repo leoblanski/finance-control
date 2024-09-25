@@ -35,9 +35,11 @@ class Register extends BaseRegister
                     ])
                     ->required(),
                 Forms\Components\TextInput::make('username')
-                    ->label('Usuário')
-                    ->unique()
+                    ->label(__('labels.username'))
                     ->required()
+                    ->maxLength(255)
+                    ->rules(['regex:/^[a-zA-Z0-9._-]+$/'])
+                    ->unique()
                     ->columnSpan([
                         'default' => 2,
                     ]),
