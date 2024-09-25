@@ -44,7 +44,7 @@
 
             <x-filament-panels::form wire:submit="authenticate" class="sm:w-4/5 md:w-3/5">
                 <h1 class="items-start self-start text-gray-950 dark:text-white">
-                    {{ $isAdminPanel ? 'Logar no Painel Administrativo' : 'Login - Painel do Cliente' }}</h1>
+                    {{ $isAdminPanel ? 'Logar no Painel Administrativo' : 'Login - Painel do Usuário' }}</h1>
                 {{ $this->form }}
 
                 <div class="flex justify-between items-center">

@@ -77,6 +77,7 @@ class Category extends Model
             ToggleColumn::make('active')
                 ->label(__('labels.active'))
                 ->sortable()
+                ->disabled()
                 ->searchable(),
         ];
     }

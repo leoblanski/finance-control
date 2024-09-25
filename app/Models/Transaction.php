@@ -87,10 +87,12 @@ class Transaction extends Model
                 Select::make('category_id')
                     ->searchable()
                     ->label(__('labels.category'))
+                    ->preload()
                     ->relationship('category', 'name')
                     ->required(),
                 Select::make('payment_type_id')
                     ->searchable()
+                    ->preload()
                     ->label(__('labels.payment_type'))
                     ->relationship('paymentType', 'name')
                     ->required(),
