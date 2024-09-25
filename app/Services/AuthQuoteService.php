@@ -6,32 +6,24 @@ class AuthQuoteService
 {
     private $quotes = [
         [
+            'quote' => 'Chega de planilhas complicadas e desorganizadas. Com o quantofoi eu e meu marido conseguimos
+                 gerenciar nossas finanças pessoais de forma simples e eficiente.',
+            'author' => 'Maria Santos',
+            'company' => 'Usuária Pessoal',
+        ],
+        [
             'quote' =>
-            'O Sistema de Controle de Transações Financeiras simplificou o gerenciamento das minhas finanças pessoais.
+            'O quantofoi simplificou o gerenciamento das minhas finanças pessoais.
                  Agora, posso categorizar despesas e receitas facilmente e ter uma visão clara do meu orçamento.',
             'author' => 'Ana Silva',
             'company' => 'Usuária Pessoal',
         ],
         [
             'quote' =>
-            'Antes do Sistema de Controle de Transações, era difícil acompanhar as entradas e saídas de dinheiro da minha empresa.
+            'Antes do quantofoi era difícil acompanhar as entradas e saídas de dinheiro da minha empresa.
                  Este sistema trouxe mais organização e eficiência, permitindo-me focar em estratégias de crescimento.',
             'author' => 'Carlos Pereira',
-            'company' => 'Empresário, Sucesso Financeiro',
-        ],
-        [
-            'quote' =>
-            'O sistema transformou a maneira como gerencio minhas finanças empresariais. Agora, tudo está bem categorizado e fácil de acessar,
-                 o que me ajuda a tomar decisões financeiras mais informadas.',
-            'author' => 'Mariana Rodrigues',
-            'company' => 'Diretora Financeira, Crescimento Certo',
-        ],
-        [
-            'quote' =>
-            'Com o Sistema de Controle de Transações, a geração de relatórios detalhados se tornou muito mais simples.
-                 Isso me ajuda a ter uma visão clara das minhas finanças e a tomar decisões mais estratégicas.',
-            'author' => 'João Santos',
-            'company' => 'Consultor Financeiro, Alpha Finanças',
+            'company' => 'Usuária Pessoal',
         ],
         [
             'quote' =>
