@@ -76,6 +76,10 @@ class UserPanelProvider extends PanelProvider
             ->viteTheme('resources/css/app.css')
             ->plugins([
                 FilamentApexChartsPlugin::make()
-            ]);
+            ])
+            ->renderHook(
+                'panels::head.start',
+                fn() => view('analyticsTag'),
+            );
     }
 }
