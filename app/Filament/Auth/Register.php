@@ -36,6 +36,7 @@ class Register extends BaseRegister
                     ->required(),
                 Forms\Components\TextInput::make('username')
                     ->label('Usuário')
+                    ->unique()
                     ->required()
                     ->columnSpan([
                         'default' => 2,
