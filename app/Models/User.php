@@ -75,7 +75,7 @@ class User extends Authenticatable implements FilamentUser, HasName
 
     public function getFilamentName(): string
     {
-        return "test";
+        return $this->name;
     }
 
     public static function getForm(): array
