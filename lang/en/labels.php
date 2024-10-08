@@ -84,4 +84,6 @@ return [
     'primary_color' => 'Primary Color',
     'secondary_color' => 'Secondary Color',
     'create_transaction' => 'Create Transaction',
+    'price_per_installment' => 'Price per Installment',
+    'installments' => 'Installments',
 ];

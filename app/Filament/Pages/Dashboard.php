@@ -42,7 +42,7 @@ class Dashboard extends BaseDashboard
                             ->label(__('labels.end_date'))
                             ->default(now()),
                         Select::make('category_ids')
-                            ->label(__('labels.category'))
+                            ->label(__('labels.categories'))
                             ->multiple()
                             ->options(fn() => Category::pluck('name', 'id')->toArray())
                     ])

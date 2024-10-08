@@ -77,7 +77,7 @@ class TransactionResource extends Resource
                     ->options(fn() => PaymentType::pluck('name', 'id')->toArray()),
                 SelectFilter::make('category_id')
                     ->searchable()
-                    ->label(__('labels.category'))
+                    ->label(__('labels.categories'))
                     ->multiple()
                     ->options(fn() => Category::pluck('name', 'id')->toArray()),
             ])
@@ -91,6 +91,28 @@ class TransactionResource extends Resource
                         }
 
                         return $data;
+                    })
+                    ->after(function ($record, $data) {
+
+                        dd(1);
+                        if ($data['type'] == 'out') {
+                            if ($record->payment_type_id == PaymentType::TYPE_CREDIT_ID) {
+                                $pricePerInstallment = $record->value / $record->installments;
+
+                                dd($pricePerInstallment, $record->installments);
+
+                                // for ($installments; $installments > 0; $installments--) {
+
+                                //     $record->replicate()->fill([
+                                //         'value' => -$record->per_installment,
+                                //         'installments' => 0,
+                                //     ])->save();
+                                // }
+
+                            }
+                        }
+
+                        $record->save();
                     }),
                 Tables\Actions\DeleteAction::make(),
             ])

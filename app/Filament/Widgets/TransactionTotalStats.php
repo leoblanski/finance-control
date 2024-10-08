@@ -41,6 +41,8 @@ class TransactionTotalStats extends BaseWidget
 
         $totals = $query->first();
 
+        $totalColor = $totals->total < 0 ? 'danger' : 'success';
+
         return [
             Stat::make(
                 label: __('labels.total_entries'),
@@ -64,7 +66,8 @@ class TransactionTotalStats extends BaseWidget
                 value: function () use ($totals) {
                     return 'R$ ' . number_format($totals->total, 2, ',', '.');
                 }
-            )->color('primary'),
+            )
+                ->color($totalColor),
         ];
     }
 }

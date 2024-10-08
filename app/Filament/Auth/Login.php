@@ -42,7 +42,7 @@ class Login extends BaseAuth
                         return new HtmlString(
                             Blade::render('
                                 <span>Não possui uma conta?</span>
-                                <a href="{{filament()->getRegistrationUrl()}}" color="primary" class="text-primary font-bold underline">Se cadastrar</a>
+                                <a href="{{filament()->getRegistrationUrl()}}" color="primary" class="text-primary font-bold underline">Cadastrar-se</a>
                             ')
                         );
                     }),

@@ -86,4 +86,6 @@ return [
     'primary_color' => 'Cor Primária',
     'secondary_color' => 'Cor Secundária',
     'create_transaction' => 'Criar Transação',
+    'price_per_installment' => 'Preço por Parcela',
+    'installments' => 'Parcelas',
 ];
