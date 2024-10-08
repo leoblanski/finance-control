@@ -8,6 +8,9 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
@@ -73,30 +76,88 @@ class Transaction extends Model
     public static function getForm(): array
     {
         return [
-            Select::make('user_id')
-                ->label(__('labels.owner'))
-                ->hint('O responsável pela transação')
-                ->relationship('user', 'name')
-                ->columnSpanFull()
-                ->nullable(),
             Grid::make([
                 'default' => '1',
                 'sm' => '1',
                 'md' => '2',
             ])->schema([
+                Select::make('user_id')
+                    ->label(__('labels.owner'))
+                    ->relationship('user', 'name')
+                    ->nullable(),
                 Select::make('category_id')
+                    ->default('9') // Other
                     ->searchable()
                     ->label(__('labels.category'))
                     ->preload()
                     ->relationship('category', 'name')
                     ->required(),
+            ]),
+            Grid::make([
+                'default' => '1',
+                'sm' => '1',
+                'md' => '2',
+            ])->schema([
+                Money::make('value')
+                    ->label(__('labels.value'))
+                    // ->live()
+                    ->dehydrateMask(true)
+                    ->default('100,00')
+                    ->required(),
                 Select::make('payment_type_id')
+                    ->live()
                     ->searchable()
                     ->preload()
                     ->label(__('labels.payment_type'))
                     ->relationship('paymentType', 'name')
+                    ->afterStateUpdated(function (Get $get, Set $set) {
+                        dd($get('value'));
+                        if ($get('payment_type_id') == PaymentType::TYPE_CREDIT_ID) {
+                            $set('installments', '1');
+                            $set('per_installment', $parsedValue); // Use parsed value
+                            return;
+                        }
+                    })
                     ->required(),
             ]),
+            Grid::make([
+                'default' => '1',
+                'sm' => '1',
+                'md' => '2',
+            ])->schema([
+                Select::make('installments')
+                    ->label(__('labels.installments'))
+                    ->options([
+                        '1' => '1x',
+                        '2' => '2x',
+                        '3' => '3x',
+                        '4' => '4x',
+                        '5' => '5x',
+                        '6' => '6x',
+                        '7' => '7x',
+                        '8' => '8x',
+                        '9' => '9x',
+                        '10' => '10x',
+                        '11' => '11x',
+                        '12' => '12x',
+                    ])
+                    ->live()
+                    ->afterStateUpdated(function (Get $get, Set $set) {
+                        $parsedValue = parseMoneyString($get('value'));
+                        $installments = intval($get('installments'));
+
+                        if ($installments > 0) {
+                            $set('per_installment', $parsedValue / $installments); // Use parsed value
+                        }
+                    })
+                    ->default('1')
+                    ->required(),
+                Money::make('per_installment')
+                    ->disabled()
+                    ->label(__('labels.price_per_installment'))
+            ])->hidden(function (Get $get) {
+                return $get('payment_type_id') != PaymentType::TYPE_CREDIT_ID;
+            }),
             DatePicker::make('date')
                 ->label(__('labels.date'))
                 ->default(now())
@@ -104,9 +165,6 @@ class Transaction extends Model
             Textarea::make('description')
                 ->label(__('labels.description'))
                 ->columnSpanFull(),
-            Money::make('value')
-                ->label(__('labels.value'))
-                ->required(),
             Radio::make('type')
                 ->label(__('labels.type'))
                 ->options([
@@ -116,6 +174,7 @@ class Transaction extends Model
                 ->default('out'),
         ];
     }
+
 
     public static function getColumns(): array
     {
